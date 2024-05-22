@@ -1,0 +1,3 @@
+Verze pro internet je verze ve složce vydaná s následujícími rozdíly:
+- sifrovac.html se prejmenuje na index.php
+- v index.php bude src u scipru pro vue: https://unpkg.com/vue@3/dist/vue.global.js
