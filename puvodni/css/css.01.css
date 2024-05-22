@@ -887,7 +887,6 @@
     -ms-grid-columns:max-content 1fr max-content;
     grid-template-columns:-webkit-max-content 1fr -webkit-max-content;
     grid-template-columns:max-content 1fr max-content;
-    gap:1.5rem;
     }
     .area
     {
@@ -1224,10 +1223,16 @@
     
     .mw8r
     {
-    width:7.5rem;
+    width:8rem;
     gap:.25rem;
     }
     
+    .mw7r
+    {
+    width:7rem;
+    gap:.25rem;
+    }
+
     .h15r
     {
     height:1.5rem;
