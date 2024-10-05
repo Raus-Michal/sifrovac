@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width , initial-scale=1.0 , viewport-fit=cover">
-<link rel="stylesheet" href="css/css.01.css">
+<link rel="stylesheet" href="css/css.css?v=1">
 <title>Šifrovač - Šifrování textu on-line</title>
 <meta name="description" content="On-line šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.">
 <meta name="keywords" content="šifrování textu">
@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://www.boar-cz.info/sifrovac/">
 <meta name="robots" content="index , follow">
 <meta property="twitter:card" content="summary_large_image">
-<!-- <meta property="twitter:site" content="@pestovanikonopi"> -->
+<!-- <meta property="twitter:site" content="@"> -->
 <meta property="twitter:url" content="https://www.boar-cz.info/sifrovac/">
 <meta property="twitter:title" content="Šifrovač - Šifrování textu on-line">
 <meta property="twitter:description" content="On-line šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.">
@@ -42,9 +42,9 @@
 "@type": "WebApplication",
 "@id": "WebApplication",
 "dateCreated": "2024-05-22",
-"dateModified": "2024-05-22",
+"dateModified": "2024-10-04",
 "datePublished": "2024-05-22",
-"version": "[1,0]",
+"version": "[1,1]",
 "mainEntityOfPage": "https://www.boar-cz.info",
 "description": "On-line šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.",
 "abstract": "On-line webová aplikace, která umí šifrovat a dešifrovat text. K tomuto šifrování a dešifrování textu používá šesti místného unikátního číselného kódu.",
@@ -123,22 +123,22 @@ fclose($handle);
 
 <form class="m1 fl wrap ac jc g1 mb2" action="none.php" @submit.prevent>
 <div class="fl g1 jc ac">
-<p class="m0">UC:</p>
+<p class="m0">ČK:</p>
 <div class="fl g05">
-<input :type="t_v" v-model="uk1" min="0" max="9" class="kod" title="1. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
-<input :type="t_v" v-model="uk2" min="0" max="9" class="kod" title="2. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
-<input :type="t_v" v-model="uk3" min="0" max="9" class="kod" title="3. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk1" min="0" max="9" class="kod" title="1. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk2" min="0" max="9" class="kod" title="2. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk3" min="0" max="9" class="kod" title="3. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
 </div>
 <div class="fl g05">
-<input :type="t_v" v-model="uk4" min="0" max="9" class="kod" title="4. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
-<input :type="t_v" v-model="uk5" min="0" max="9" class="kod" title="5. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
-<input :type="t_v" v-model="uk6" min="0" max="9" class="kod" title="6. číslice UC" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk4" min="0" max="9" class="kod" title="4. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk5" min="0" max="9" class="kod" title="5. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
+<input :type="t_v" v-model="uk6" min="0" max="9" class="kod" title="6. číslice ČK" readonly @keypress.prevent @paste.prevent @click.prevent>
 </div>
 </div>
 <div class="fl ac je h2r w10r">
 <Transition name="fuc" mode="out-in">
-<button v-if="videt2==false" @click="zobraz2" class="butt" type="button" title="Kliknutím zobrazí zadaný UC"><span class="s-1 i-6"> </span>Zobrazit UC</button>
-<button v-else-if="videt2==true" @click="zobraz2" class="butt" type="button" title="Kliknutím skryjete zadaný UC"><span class="s-1 i-7"> </span>Skrýt UC</button>
+<button v-if="videt2==false" @click="zobraz2" class="butt" type="button" title="Kliknutím zobrazí zadaný ČK"><span class="s-1 i-6"> </span>Zobrazit ČK</button>
+<button v-else-if="videt2==true" @click="zobraz2" class="butt" type="button" title="Kliknutím skryjete zadaný ČK"><span class="s-1 i-7"> </span>Skrýt ČK</button>
 </Transition>
 </div>
 </form>
@@ -305,25 +305,26 @@ fclose($handle);
 </div>
 
 <div>
-<p class="fh2">Unikátní číselný kód (UC)</p>
-<p class="t-o">Zadejte šestimístný unikátní číselný kód pro&nbsp;šifrování <dfn>(ve&nbsp;zkratce&nbsp;UC)</dfn>. <button class="dib bn bt p025" @click="o_dia('napoveda','n_uc','z_napoveda')" type="button" title="Help"><div class="i-8 s-2 b5w"> </div></button></p>
+<p class="fh2">Zadejte číselný kód (ČK)</p>
+<p class="t-o">Zadejte šestimístný číselný kód pro&nbsp;šifrování <dfn>(ve&nbsp;zkratce&nbsp;ČK)</dfn>. Pomocí tohoto číselného kódu se&nbsp;text šifruje a&nbsp;dešifruje.</p>
+<p class="t-o"><strong>Nezadávejte</strong>: čísla v&nbsp;kombinaci stejná za&nbsp;sebou, čísla v&nbsp;číselné posloupnosti a&nbsp;číselné kombinace, které se&nbsp;opakují.</p>
 <form action="none.php" @submit.prevent="start">
 <div class="pr fl g2 jc mtb4">
 <div class="fl g1">
-<input @click="uc_z" :type="t1" ref="c1" v-model="uk1" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="1. číslice UC" required>
-<input @click="uc_z" :type="t2" ref="c2" v-model="uk2" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="2. číslice UC" required>
-<input @click="uc_z" :type="t3" ref="c3" v-model="uk3" size="1" min="0" max="9" class="kod"  pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="3. číslice UC" required>
+<input @click="uc_z" :type="t1" ref="c1" v-model="uk1" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="1. číslice ČK" required>
+<input @click="uc_z" :type="t2" ref="c2" v-model="uk2" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="2. číslice ČK" required>
+<input @click="uc_z" :type="t3" ref="c3" v-model="uk3" size="1" min="0" max="9" class="kod"  pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="3. číslice ČK" required>
 </div>
 <div class="fl g1">
-<input @click="uc_z" :type="t4" ref="c4" v-model="uk4" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="4. číslice UC" required>
-<input @click="uc_z" :type="t5" ref="c5" v-model="uk5" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="5. číslice UC" required>
-<input @click="uc_z" :type="t6" ref="c6" v-model="uk6" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="6. číslice UC" required>
+<input @click="uc_z" :type="t4" ref="c4" v-model="uk4" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="4. číslice ČK" required>
+<input @click="uc_z" :type="t5" ref="c5" v-model="uk5" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="5. číslice ČK" required>
+<input @click="uc_z" :type="t6" ref="c6" v-model="uk6" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="6. číslice ČK" required>
 </div>
 
 <div class="cod-v">
 <Transition mode="out-in">
-<button class="butt" v-if="videt==false" v-show="b_v_c" @click="zobraz" type="button" title="Kliknutím zobrazí zadaný UC"><span class="i-6 s-1"> </span>Zobrazit UC</button>
-<button class="butt" v-else-if="videt==true" v-show="b_v_c" @click="zobraz" type="button" title="Kliknutím skryjete zadaný UC"><span class="i-7 s-1"> </span>Skrýt UC</button>
+<button class="butt" v-if="videt==false" v-show="b_v_c" @click="zobraz" type="button" title="Kliknutím zobrazí zadaný ČK"><span class="i-6 s-1"> </span>Zobrazit ČK</button>
+<button class="butt" v-else-if="videt==true" v-show="b_v_c" @click="zobraz" type="button" title="Kliknutím skryjete zadaný ČK"><span class="i-7 s-1"> </span>Skrýt ČK</button>
 </Transition>
 </div>
 </div>
@@ -333,9 +334,10 @@ fclose($handle);
 <button v-if="nepovolen==false" class="butt" type="submit" title="Spustit Šifrovač"><span class="i-4 s-1"> </span>Spustit</button>
 <div v-else-if="nepovolen==true" class="fl ac g05 spH">
 <div class="i-5 s-2"> </div>
-<p class="m0">Zakázaný UC</p>
+<p class="m0 tac"><strong>Zakázaná číselná kombinace</strong></p>
 <button id="butt_nepovolen" class="dib bn bt p025" @click="o_dia('napoveda','n_z_uc','z_napoveda')" type="button" title="Help">
 <div class="i-8 s-2 b5w"> </div>
+Help
 </button>
 </div>
 </Transition>
@@ -356,22 +358,22 @@ fclose($handle);
 <div class="d-h fl"><div class="i-1 s-2 b5w"> </div></div>
 <div class="d-s">
 <h2 id="h_napoveda">Co je Šifrovač</h2>
-<p>Šifrovač je&nbsp;aplikace, díky které můžete textové zprávy předávat bezpečněji. Uživatelé si&nbsp;mohou pomocí této aplikace a&nbsp;Unikátního kódu&nbsp;(UC) předávat textové zprávy v&nbsp;šifrované podobě. Šifrovaný text je&nbsp;možné posílat například emailem, messengerem nebo&nbsp;smskou.</p>
+<p>Šifrovač je&nbsp;aplikace, díky které můžete textové zprávy předávat bezpečněji. Uživatelé si&nbsp;mohou pomocí této aplikace a&nbsp;číselného kódu&nbsp;(ČK), předávat textové zprávy v&nbsp;šifrované podobě. Šifrovaný text je&nbsp;možné posílat například emailem, messengerem nebo&nbsp;smskou.</p>
 <p class="f8 mb05">Návod:</p>
 <ul class="ulHa">
-<li>Zvolte&nbsp;si&nbsp;UC =&nbsp;šestimístný unikátní číselný kód.</li>
+<li>Zvolte&nbsp;si&nbsp;šestimístný číselný kód&nbsp;(ČK).</li>
 <li>Do&nbsp;pole Běžný text napište zprávu, kterou chcete zašifrovat.</li>
 <li>Zmáčkněte tlačítko Šifrovat.</li>
 <li>V&nbsp;druhém okénku se&nbsp;zobrazí šifrovaný text, který pošlete osobě, pro&nbsp;kterou je&nbsp;zpráva určena (například emailem).</li>
-<li>Příjemce zprávy po&nbsp;zadání stejného UC zmáčkne tlačítko Přehodit, následně vloží šifrovaný text do&nbsp;pole Šifrovaný text.</li>
+<li>Příjemce zprávy po&nbsp;zadání stejného číselného kódu zmáčkne tlačítko Přehodit, následně vloží šifrovaný text do&nbsp;pole Šifrovaný text.</li>
 <li>Příjemce zprávy zmáčkne tlačítko Dešifrovat a&nbsp;zobrazí&nbsp;se dešifrovaná zpráva od&nbsp;odesílatele.</li>
 </ul>
 
-<h2 id="n_uc">Unikátní číselný kód&#8239;(UC)</h2>
-<p>Unikátní číselný kód (ve&nbsp;zkratce&#8239;UC) je&nbsp;kombinací šesti unikátních čísel. Díky těmto číslům je&nbsp;možné textovou zprávu zašifrovat a&nbsp;pouze s&nbsp;použitím těchto šesti unikátních čísel zprávu opět rozšifrovat.</p>
+<h2 id="n_uc">Číselný kód&#8239;(ČK)</h2>
+<p>Číselný kód (ve&nbsp;zkratce&#8239;ČK) je&nbsp;kombinací šesti čísel. Díky těmto číslům je&nbsp;možné textovou zprávu zašifrovat a&nbsp;pouze s&nbsp;použitím těchto šesti unikátních čísel zprávu opět rozšifrovat.</p>
 
-<h2 id="n_z_uc">Zakázané UC</h2>
-<p>Některé kombinace UC jsou zakázané kvůli bezpečnosti šifrovaných zpráv. Obvykle jsou to čísla v&nbsp;kombinaci stejná za&nbsp;sebou (například: 888, 111, 000) nebo čísla, která&nbsp;jsou postupová (například 123, 789, 210, 543). Dále číselné kombinace, které se&nbsp;opakují (například: 859 859, 763 763).</p>
+<h2 id="n_z_uc">Zakázané ČK</h2>
+<p>Některé kombinace ČK jsou zakázané kvůli bezpečnosti šifrovaných zpráv. Obvykle jsou to čísla v&nbsp;kombinaci stejná za&nbsp;sebou (například: 888, 111, 000) nebo čísla, která&nbsp;jsou postupová (například 123, 789, 210, 543). Dále číselné kombinace, které se&nbsp;opakují (například: 859 859, 763 763).</p>
 
 
 <h2>Otázky a&nbsp;odpovědi</h2>
@@ -379,7 +381,7 @@ fclose($handle);
 <p>Pokud nejde text zašifrovat, zpravidla se&nbsp;objeví okénko: Text nelze šifrovat. V&nbsp;tomto okénku je&nbsp;výpis nepovolených znaků, které je&nbsp;nutné odstranit. Tyto znaky z&nbsp;textu odstraňte. Po&nbsp;odstranění nepovolených znaků je&nbsp;možné text zašifrovat.</p>
 <p class="f8 mb05">Šifrovaný text mi nejde rozšifrovat, proč?</p>
 <ul class="ulHa">
-<li>K&nbsp;rozšifrování textu používáte jiný UC, než&nbsp;který byl použit k&nbsp;zašifrování textu.</li>
+<li>K&nbsp;rozšifrování textu používáte jiný ČK, než&nbsp;který byl použit k&nbsp;zašifrování textu.</li>
 <li>Místo tlačítka Dešifrovat se&nbsp;mačká tlačítko Šifrovat, použijte tlačítko Přehodit, pro&nbsp;výměnu šifrování za&nbsp;dešifrování.</li>
 <li>Do&nbsp;šifrovaného textu byl přidán znak, který tam nepatří (za&nbsp;přidaný znak, se&nbsp;považuje i&nbsp;mezera (klávesa Mezerník)) anebo zalomení řádku (pomocí klávesy Enter). Šifrovaný text začíná a&nbsp;končí znakem&nbsp;# (mřížka).</li>
 <li>Ze&nbsp;šifrovaného textu byl odebrán znak. Šifrovaný text začíná a&nbsp;končí znakem&nbsp;# (mřížka). Pokud odeberete znak ze&nbsp;šifrovaného textu, šifra se&nbsp;rozbije.</li>
@@ -389,15 +391,15 @@ fclose($handle);
 <p>Šifrovaný text se&nbsp;nezalamuje, a&nbsp;proto může končit někde ztraceně, mimo viditelnost okna některých aplikací. Označte šifrovaný text od&nbsp;jeho začátku, až&nbsp;po&nbsp;začátek dalšího řádku pod&nbsp;šifrovaným textem. Takto označený šifrovaný text zkopírujte a&nbsp;vložte do&nbsp;Šifrovače.</p>
 <p>Přidání mezery anebo zalomení, před&nbsp;začátek a&nbsp;za&nbsp;koncem šifrovaného textu, ničemu nevadí. Šifrovač, sám prázdné znaky (mezery a&nbsp;zalomení řádku), před a&nbsp;za&nbsp;šifrovaným textem, automaticky odstraní. Je&nbsp;však nutné dávat&nbsp;si pozor, aby&nbsp;nebyl zkopírován mimo šifrovaný text, i&nbsp;další text, který k&nbsp;šifrovanému textu nepatří. Pokud&nbsp;se tak stane, text, který k&nbsp;šifrovanému textu nepatří, odstraňte.</p>
 
-<p class="f8 mb05">Jak předat příjemci UC?</p>
-<p>Ideální je, předat příjemci UC na&nbsp;kousku papíru. Pokud je příjemce šifrované zprávy nedosažitelný, předejte UC takto:</p>
+<p class="f8 mb05">Jak předat příjemci ČK?</p>
+<p>Ideální je, předat příjemci ČK na&nbsp;kousku papíru. Pokud je příjemce šifrované zprávy nedosažitelný, předejte ČK takto:</p>
 <ul class="ulHa">
-<li>Pokud budou šifrované zprávy zasílány messengerem, zašlete mu&nbsp;UC emailem anebo smskou</li>
-<li>Pokud budou šifrované zprávy zasílány emailem, zašlete mu&nbsp;UC messengerem anebo smskou</li>
-<li>Pokud budou šifrované zprávy zasílány smskou, zašlete mu&nbsp;UC emailem anebo messengerem</li>
+<li>Pokud budou šifrované zprávy zasílány messengerem, zašlete mu&nbsp;ČK emailem anebo smskou</li>
+<li>Pokud budou šifrované zprávy zasílány emailem, zašlete mu&nbsp;ČK messengerem anebo smskou</li>
+<li>Pokud budou šifrované zprávy zasílány smskou, zašlete mu&nbsp;ČK emailem anebo messengerem</li>
 </ul>
-<p class="f8 mb05">Je možné zašifrovaný text rozšifrovat i&nbsp;bez&nbsp;UC?</p>
-<p>Bohužel ano, toto je&nbsp;možné. Pokročilí programátor s&nbsp;vyšším IQ, může algoritmus šifrování prolomit. Více není možné sdělit, aby&nbsp;nebylo prozrazeno více než je&nbsp;nutné.</p>
+<p class="f8 mb05">Je možné zašifrovaný text rozšifrovat i&nbsp;bez&nbsp;ČK?</p>
+<p>Bohužel ano, toto je&nbsp;možné. Profesionální programátor s&nbsp;vynaložením velkého úsilý, by&nbsp;mohl zvládnout šifrovaný text prolomit. Více není možné sdělit, aby&nbsp;nebylo prozrazeno více než je&nbsp;nutné.</p>
 
 <p class="f8 mb05">Je možné šifrovat bezpečněji?</p>
 <p>Ano, je&nbsp;možné použít vícenásobné šifrování: dvojité, trojité&nbsp;atd.</p>
@@ -424,8 +426,7 @@ fclose($handle);
 <p>Aplikace Šifrovač je&nbsp;webovou aplikací <span class="dib">od&nbsp;Boar-cz</span>.</p>
 <p>Aplikace je&nbsp;naprogramovaná jazyky: HTML&#8239;5, CSS&#8239;3, JavaScript&#8239;ES6 a&nbsp;frameworkem Vue&#8239;3. K&nbsp;vytvoření šifrování bylo použito umělé inteligence, konkrétně robota ChatGPT.</p>
 <p>Aplikace je&nbsp;zdarma a&nbsp;podléhá autorským právům.</p>
-<p>Verze aplikace: 1.0</p>
-<p><em>Co je nutné v&nbsp;aplikaci zlepšit: optimalizovat na&nbsp;výkon HTML, CSS, JavaScript a&nbsp;fonty.</em></p>
+<p>Verze aplikace: 1.1</p>
 <p class="f8 mb05">Proč šifrovat text</p>
 <p>Tak jako každý dům je možné vykrást, tak i&nbsp;každou textovou zprávu je možné zcizit. Můžeme se&nbsp;rozhodnout, jestli u&nbsp;svého domu necháme dveře otevřené do&nbsp;kořán, anebo&nbsp;si dům co&nbsp;nejvíce zabezpečíme. Čím&nbsp;více zabezpečovacích prvků, tím větší bezpečí a&nbsp;více nepříjemností pro&nbsp;lupiče. Šifrovaný text, můžeme považovat za&nbsp;další zabezpečovací prvek, další dveře, které musí lupič překonat k&nbsp;tomu, aby získal svůj lup. V&nbsp;našem případě text zprávy. Šifrování textu pomocí této aplikace zvyšuje bezpečnost zasílání textových zpráv.</p>
 
@@ -450,7 +451,7 @@ fclose($handle);
 <div class="d-h fl"><div @click="statstika=true" class="i-1 s-2 b5w"> </div></div>
 <div class="d-s">
 <h2 id="h_kontakt">Kontakt</h2>
-<p>V&nbsp;případě potřeby, můžete kontaktovat programátora pomocí emailu.</p>
+<p>Programátora aplikace můžete kontaktovat pomocí emailu.</p>
 <p>Níže je tlačítko, kterým zobrazíte email na&nbsp;programátora.</p>
 <div class="fl ac jc">
 <form ref="e_form" class="fl ac jc wrap g1 bv1 p1 mb1 wm20r br8 pr" action="none.php" @submit.prevent>
@@ -524,6 +525,6 @@ fclose($handle);
 
 </div> <!-- konec DIV App Vue -->
 <script src="script/vue.global.js"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
-<script src="script/script.01.js"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
+<script src="script/script.js?v=1"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
 </body>
 </html>

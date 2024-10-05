@@ -132,6 +132,11 @@ display:none; /* vypne posuvník na volbu čísloem kliknutím */
 }
 button,input[type=checkbox]{cursor:pointer;}
 
+button:focus{
+outline:none; /* Odstranění standardního zvýraznění focusu */
+box-shadow:0 0 5px var(--b2); /* Přidání stínu pro zvýraznění focusu */
+}
+
 img
 {
 width:100%;
@@ -472,8 +477,9 @@ opacity:0;
 -o-transition:opacity 250ms;
 transition:opacity 250ms;
 z-index:-1;
+cursor:default;
 }
-    
+
 /* tablet a větší */
 @media only screen and (min-width:48em)
 {
