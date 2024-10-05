@@ -955,7 +955,7 @@ app.mount('#app');
 
 
 
-const odkazy_window_open={id:["sdil-fb","sdil-tw","href_boar","href_projekty"] /* id určuje id odkazů, které mají být upraveny */ ,SIRKA:600,VYSKA:600,min_VYSKA:800,min_SIRKA:800,text_okna:"Nové okno",
+const odkazy_window_open={id:["sdil-fb","sdil-tw","href_boar"] /* id určuje id odkazů, které mají být upraveny */ ,SIRKA:600,VYSKA:600,min_VYSKA:800,min_SIRKA:800,text_okna:"Nové okno",
 prepis(){
 /* funkce zajistí přepis odkazu href na JS funkci window.open */
 

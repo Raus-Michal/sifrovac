@@ -151,19 +151,19 @@ fclose($handle);
 <form action="none.php" @submit.prevent>
 <div class="g-area">
 
-<div>
+<div class="pr">
 <div class="pr h15r">
 <Transition name="fuc" mode="out-in">
-<p v-if="otoceni==true" class="mb05">Šifrovaný text</p>
-<p v-else-if="otoceni==false" class="mb05">Běžný text</p>
+<p v-if="otoceni==true" class="mb05 f8">Šifrovaný text</p>
+<p v-else-if="otoceni==false" class="mb05 f8">Běžný text</p>
 </Transition>
 </div>
 
 <div class="pr">
-<textarea v-model="text_o1" @paste="orez_area1" ref="area_o1" class="area mb0" cols="50" rows="10" title="Zde můžete vkládat text anebo šifrovaný text" :placeholder="placeholder_ta1" required></textarea>
+<textarea v-model="text_o1" @paste="orez_area1" ref="area_o1" class="area mb05" cols="50" rows="10" title="Zde můžete vkládat text anebo šifrovaný text" :placeholder="placeholder_ta1" required></textarea>
 <p id="p_prazdne" class="zkopi" ref="oznNeVloz">Schránka je&nbsp;prázdná</p>
 </div>
-<p class="tar mb05">znaků: {{znaku}}/{{max_znaku}}</p>
+<p class="p-znak">znaků: {{znaku}}/{{max_znaku}}</p>
 
 
 <div class="fl g1 h2-5r w100">
@@ -185,16 +185,16 @@ fclose($handle);
 <div class="g-area-stred">
 
 <div class="fl jc ac">
-<button @click="zmena" type="button" class="butt" title="Vyměnit">
-<div class="s-2 i-11" :class="otocCSS"> </div>
+<button @click="zmena" type="button" class="butt buttS" title="Vyměnit">
+<div class="s-3 i-11" :class="otocCSS"> </div>
 <p class="m0">Prohodit</p>
 </button>
 </div>
 
 <div class="fl jc ac tac pr">
 <Transition name="fuc">
-<button  v-if="otoceni==false" class="butt" @click="akce" type="submit" title="Šifrovat text"><span class="s-2 i-12"> </span>Šifrovat</button>
-<button  v-else-if="otoceni==true" class="butt" @click="akce" type="submit" title="Dešifrovat text"><span class="s-2 i-13"> </span>Dešifrovat</button>
+<button  v-if="otoceni==false" class="butt buttS" @click="akce" type="submit" title="Šifrovat text"><span class="s-3 i-12"> </span>Šifrovat</button>
+<button  v-else-if="otoceni==true" class="butt buttS" @click="akce" type="submit" title="Dešifrovat text"><span class="s-3 i-13"> </span>Dešifrovat</button>
 </Transition>
 </div>
 </div>
@@ -202,8 +202,8 @@ fclose($handle);
 <div>
 <div class="pr h15r">
 <Transition name="fuc"  mode="out-in">
-<p v-if="otoceni==false" class="mb05">Šifrovaný text</p>
-<p v-else-if="otoceni==true" class="mb05">Běžný text</p>
+<p v-if="otoceni==false" class="mb05 f8">Šifrovaný text</p>
+<p v-else-if="otoceni==true" class="mb05 f8">Běžný text</p>
 </Transition>
 </div>
 <div class="pr">
@@ -237,12 +237,9 @@ fclose($handle);
 <ul class="fl ac g1 m0 wrap lstn p0">
 <li class="fl bd1 ul-soc"><a id="sdil-tw" href="https://twitter.com/intent/tweet?url=https://www.boar-cz.info/sifrovac/&text=" class="fl ac g1 p05 w100" title="Sdílet na síti X" target="_blank" rel="nofollow"><span class="i-3 s-3"> </span>Sdílet na X</a></li>
 <li class="fl bd1 ul-soc"><a id="sdil-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://www.boar-cz.info/sifrovac/" class="fl ac g1 p05 w100" title="Sdílet na Facebooku" target="_blank" rel="nofollow"><span class="i-2 s-3"></span>Sdílet na FB</a></li>
+<li class="fl bd1 ul-soc"><a id="href_boar" class="fl g1 ac p05 w100" href="https://www.boar-cz.info" title="Webové stránky výrobce" target="_blank" rel="follow"><span class="i-17 s-3"> </span>Webové stránky výrobce aplikace</a></li>
 </ul>
 
-<ul class="m0 p0 lstn">
-<li class="fl mb1"><a id="href_boar" class="fl g1 ac bd1 p05 w100" href="https://www.boar-cz.info" title="Webové stránky výrobce aplikace" target="_blank" rel="follow"><span class="i-17 s-1 s1-5"> </span>Webové stránky na&nbsp;přání</a></li>
-<li class="fl"><a id="href_projekty" class="fl g1 ac bd1 p05 w100" href="http://www.projekty.jednoduse.cz" title="Jak udělat jednoduše webový projekt" target="_blank" rel="follow"><span class="i-17 s-1 s1-5"> </span>Webové projekty jednoduše</a></li>
-</ul>
 </aside>
 
 <footer class="pata">
