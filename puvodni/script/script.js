@@ -555,7 +555,7 @@ if(this.otoceni)
 {
 // Když je nastaveno Dešifrovat
 this.otocCSS="o-jinak";
-this.placeholder_ta1="Napište text, který chcete dešifrovat"; // v-bind placeholder textarea1
+this.placeholder_ta1="Vložte text, který chcete dešifrovat"; // v-bind placeholder textarea1
 this.placeholder_ta2="Zmáčkněte Dešifrovat a objeví se dešifrovaný text"; // v-bind placeholder textarea2
 }
 else
@@ -575,14 +575,11 @@ o_dia(id,scrool,z_but){
 const dia=document.getElementById(id); /* objekt dialogového okna */
 
 dia.showModal(); /* otevře dialogové okno */
-dia.style.display="grid"; /* musí být u dialog okna vytvořen grid! */
-
 
 setTimeout(()=>{
 const but=document.getElementById(z_but); /* objekt buttonu pro zavření dialogového okna */
 const sc=document.getElementById(scrool); /* objekt na který se při otevření dialogového okna má provést scrool */
-sc.scrollIntoView({behavior:'smooth'}); /* bude scrool na nadpis, pokud by uživatel opět otevřel DIALOG a byl v něm posunut dole */
-
+sc.scrollIntoView({behavior:"smooth"}); /* bude scrool na nadpis, pokud by uživatel opět otevřel DIALOG a byl v něm posunut dole */
 but.focus(); /* zaměří button dialogového okna */
 },200); /* zpoždění je nutné, aby bylo možné prvky zobrazené zachytit */ 
 
@@ -592,7 +589,6 @@ but.focus(); /* zaměří button dialogového okna */
 z_dia(id){
 // console.log(id);
 document.getElementById(id).close(); // zavře dialog okno
-document.getElementById(id).style.display="none"; // musí být display NONE, protože byl otevřen a zapnut display GRID
 },
 
 mail(){

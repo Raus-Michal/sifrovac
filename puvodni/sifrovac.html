@@ -184,14 +184,14 @@ fclose($handle);
 
 <div class="g-area-stred">
 
-<div class="fl jc ac">
+<div class="fl jc ac w100">
 <button @click="zmena" type="button" class="butt buttS" title="Vyměnit">
 <div class="s-3 i-11" :class="otocCSS"> </div>
 <p class="m0">Prohodit</p>
 </button>
 </div>
 
-<div class="fl jc ac tac pr">
+<div class="fl jc ac tac pr w100">
 <Transition name="fuc">
 <button  v-if="otoceni==false" class="butt buttS" @click="akce" type="submit" title="Šifrovat text"><span class="s-3 i-12"> </span>Šifrovat</button>
 <button  v-else-if="otoceni==true" class="butt buttS" @click="akce" type="submit" title="Dešifrovat text"><span class="s-3 i-13"> </span>Dešifrovat</button>
@@ -266,7 +266,7 @@ fclose($handle);
 <div>
 <p class="fh2">Vítejte v&nbsp;aplikaci</p>
 <form action="none.php" @submit.prevent="souhlas">
-<p class="t-o">Před používáním Šifrovače, se&nbsp;nejprve seznamte s&nbsp;jeho používáním a&nbsp;přečtěte&nbsp;si podmínkami pro&nbsp;šifrování.</p>
+<p class="t-o">Před používáním Šifrovače, se&nbsp;nejprve seznamte s&nbsp;jeho používáním a&nbsp;přečtěte&nbsp;si podmínky pro&nbsp;šifrování.</p>
 <ul class="lstn">
 <li class="mb1">
 <button @click="o_dia('napoveda','h_napoveda','z_napoveda')" type="button" class="butt w100" title="Nápověda"><span class="i-10 s-1"> </span>Co&nbsp;je&nbsp;Šifrovač</button>
@@ -355,9 +355,10 @@ Help
 
 
 <dialog id="napoveda">
-<div class="d-h fl"><div class="i-1 s-2 b5w"> </div></div>
+<div id="h_napoveda"></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
 <div class="d-s">
-<h2 id="h_napoveda">Co je Šifrovač</h2>
+<h2>Co je Šifrovač</h2>
 <p>Šifrovač je&nbsp;aplikace, díky které můžete textové zprávy předávat bezpečněji. Uživatelé si&nbsp;mohou pomocí této aplikace a&nbsp;číselného kódu&nbsp;(ČK), předávat textové zprávy v&nbsp;šifrované podobě. Šifrovaný text je&nbsp;možné posílat například emailem, messengerem nebo&nbsp;smskou.</p>
 <p class="f8 mb05">Návod:</p>
 <ul class="ulHa">
@@ -420,9 +421,10 @@ Help
 
 
 <dialog id="o_aplikaci">
-<div class="d-h fl"><div class="i-1 s-2 b5w"> </div></div>
+<div id="h_o_aplikaci"></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
 <div class="d-s">
-<h2 id="h_o_aplikaci">Aplikace Šifrovač</h2>
+<h2>Aplikace Šifrovač</h2>
 <p>Aplikace Šifrovač je&nbsp;webovou aplikací <span class="dib">od&nbsp;Boar-cz</span>.</p>
 <p>Aplikace je&nbsp;naprogramovaná jazyky: HTML&#8239;5, CSS&#8239;3, JavaScript&#8239;ES6 a&nbsp;frameworkem Vue&#8239;3. K&nbsp;vytvoření šifrování bylo použito umělé inteligence, konkrétně robota ChatGPT.</p>
 <p>Aplikace je&nbsp;zdarma a&nbsp;podléhá autorským právům.</p>
@@ -438,6 +440,7 @@ Help
 <li>Tato aplikace nesmí být zneužita k&nbsp;trestné činnosti anebo k&nbsp;protiprávnímu jednání.</li>
 <li>Aplikace podléhá autorským právům <span class="dib">Boar-cz</span>.</li>
 <li>Aplikace je&nbsp;zdarma a&nbsp;nesmí za&nbsp;její používání být&nbsp;požadován jakýkoli poplatek anebo&nbsp;služba.</li>
+<li>Aplikace uloží do&nbsp;zařízení informaci, že&nbsp;byl udělen souhlas s&nbsp;těmito podmínkymi.</li>
 </ul>
 
 </div>
@@ -448,7 +451,7 @@ Help
 
 
 <dialog id="kontakt">
-<div class="d-h fl"><div @click="statstika=true" class="i-1 s-2 b5w"> </div></div>
+<div class="d-h fl ac g05"><div @click="statstika=true" class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
 <div class="d-s">
 <h2 id="h_kontakt">Kontakt</h2>
 <p>Programátora aplikace můžete kontaktovat pomocí emailu.</p>
@@ -475,11 +478,11 @@ Help
 
 
 <dialog id="ne_znaky">
-<div class="d-h fl"><div class="i-1 s-2 b5w"> </div></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
 <div class="d-s">
 <div v-if="nep_znaky!=''">
 
-<p class="fh2" id="h_ne_znaky">Text nelze šifrovat</p>
+<p class="fh2 pt1" id="h_ne_znaky">Text nelze šifrovat</p>
 <p>Text není možné šifrovat, protože obsahuje nepovolené znaky.</p>
 <p>Výpis nepovolených znaků: <span class="fp f8">{{nep_znaky}}</span></p>
 <p>Smažte tyto znaky, aby bylo možné text šifrovat.</p>
@@ -502,11 +505,11 @@ Help
 
 
 <dialog id="ne_sifra">
-<div class="d-h fl"><div class="i-1 s-2 b5w"> </div></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
 <div class="d-s">
 
 
-<p class="fh2" id="h_ne_sifra">Dešifrování není možné</p>
+<p class="fh2 pt1" id="h_ne_sifra">Dešifrování není možné</p>
 
 <p>Text není možné dešifrovat, šifrovaný text začíná a&nbsp;končí znakem&nbsp;# (mřížka).</p>
 <p class="mb0">Pokud šifrovaný text nezačíná a&nbsp;nekončí znakem&nbsp;# (mřížka):</p>

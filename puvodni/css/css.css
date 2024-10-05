@@ -137,6 +137,12 @@ outline:none; /* Odstranění standardního zvýraznění focusu */
 box-shadow:0 0 5px var(--b2); /* Přidání stínu pro zvýraznění focusu */
 }
 
+button:active{
+background-color:var(--b4); /* Barva pozadí při kliknutí */
+box-shadow:0 1px 5px var(--b2);    /* Přidání stínu při kliknutí */
+transform:translateY(1px); /* Mírný pohyb dolů při kliknutí */
+}
+
 img
 {
 width:100%;
@@ -388,7 +394,8 @@ color:var(--b1);
 font-size:1.25rem;
 flex-direction:column;
 gap:.25rem;
-
+width:100%;
+min-width:8rem;
 }
 
 .b5w
@@ -550,7 +557,6 @@ border:1px dotted var(--b3);
 
 dialog
 {
-grid-template-rows:3.5rem 1fr auto;
 width:80%;
 max-width:500px;
 height:-moz-fit-content;
@@ -561,6 +567,7 @@ border:0;
 padding:0;
 margin:auto;
 border-radius:8px;
+overflow:auto;
 }
 
 dialog::-webkit-backdrop
@@ -573,11 +580,24 @@ dialog::backdrop
 background-color:rgba(0,0,0,.5);
 }
 
+dialog::-webkit-scrollbar{display:none;}
+
 .d-p,.d-h
 {
+position:-webkit-sticky;
+position:sticky;
+z-index:2;
+top:0;
+left:0;
 background:var(--b2);
 padding:.5rem;
 border-bottom:1px solid var(--b3);
+}
+
+.d-p
+{
+bottom:-1px;
+box-shadow:0 -2px 10px var(--b4);
 }
 
 .d-s
@@ -589,7 +609,8 @@ overflow:auto;
 
 .d-s h2
 {
-padding-top:1rem;
+padding-top:4rem; /* deklarace kvůli správnému scrool na objekt */
+margin-top:-3rem; /* deklarace kvůli správnému scrool na objekt */
 }
 
 .d-s p
@@ -736,6 +757,11 @@ padding:0;
 .p1
 {
 padding:1rem;
+}
+
+.pt1
+{
+padding-top:1rem;
 }
 
 .p05
