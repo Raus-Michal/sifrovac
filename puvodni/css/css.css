@@ -568,6 +568,7 @@ padding:0;
 margin:auto;
 border-radius:8px;
 overflow:auto;
+background-color:var(--b2);
 }
 
 dialog::-webkit-backdrop
@@ -589,7 +590,7 @@ position:sticky;
 z-index:2;
 top:0;
 left:0;
-background:var(--b2);
+background-color:var(--b2);
 padding:.5rem;
 border-bottom:1px solid var(--b3);
 }
@@ -605,6 +606,7 @@ box-shadow:0 -2px 10px var(--b4);
 padding:1rem;
 padding-top:0;
 overflow:auto;
+background-color:white;
 }
 
 .d-s h2
@@ -649,12 +651,22 @@ font-size:calc(2rem + 1vw);
 font-size:.8rem;
 }
 
+.f125
+{
+font-size:1.25rem;
+}
+
 .fh2
 {
 font-family:"nadpis";
 font-size:1.5rem;
 font-weight:bold;
 margin-bottom:.5rem;
+}
+
+.f6
+{
+font-weight:600;
 }
 
 .f8
@@ -914,6 +926,11 @@ overflow:visible;
 hyphens:auto;
 text-align:justify;
 margin-bottom:1rem;
+}
+
+.cd
+{
+cursor:default;
 }
 
 .v-leave-from {

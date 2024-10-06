@@ -88,8 +88,8 @@ fclose($handle);
 <div class="fl g1 m1 mb2 ac">
 <div class="i-1 s-logo"> </div>
 <div>
-<p class="fp f8 lh1 m0">Šifrovač</p>
-<p class="m0 tac">Šifrování textu on-line</p>
+<p class="fp f8 lh1 m0 cd">Šifrovač</p>
+<p class="m0 tac cd">Šifrování textu on-line</p>
 </div>
 </div>
 <div class="tac">
@@ -109,7 +109,7 @@ fclose($handle);
 <div class="i-1 s-logo"> </div>
 
 <div>
-<p class="fp f8 m0">Šifrovač</p>
+<p class="fp f8 m0 cd">Šifrovač</p>
 </div>
 </div>
 
@@ -147,15 +147,15 @@ fclose($handle);
 </header>
 <main>
 <section>
-<h1 class="tac m1 mb2">Šifrování textu <span class="dib">on-line</span></h1>
+<h1 class="tac m1 mb2 cd">Šifrování textu <span class="dib">on-line</span></h1>
 <form action="none.php" @submit.prevent>
 <div class="g-area">
 
 <div class="pr">
 <div class="pr h15r">
 <Transition name="fuc" mode="out-in">
-<p v-if="otoceni==true" class="mb05 f8">Šifrovaný text</p>
-<p v-else-if="otoceni==false" class="mb05 f8">Běžný text</p>
+<p v-if="otoceni==true" class="f125 f6 lh1">Šifrovaný text</p>
+<p v-else-if="otoceni==false" class="f125 f6 lh1">Běžný text</p>
 </Transition>
 </div>
 
@@ -202,8 +202,8 @@ fclose($handle);
 <div>
 <div class="pr h15r">
 <Transition name="fuc"  mode="out-in">
-<p v-if="otoceni==false" class="mb05 f8">Šifrovaný text</p>
-<p v-else-if="otoceni==true" class="mb05 f8">Běžný text</p>
+<p v-if="otoceni==false" class="f125 f6 lh1">Šifrovaný text</p>
+<p v-else-if="otoceni==true" class="f125 f6 lh1">Běžný text</p>
 </Transition>
 </div>
 <div class="pr">
@@ -260,8 +260,8 @@ fclose($handle);
 <div class="fl g1 m1 mb2 ac">
 <div class="i-1 s-logo"> </div>
 <div>
-<p class="fp f8 lh1 m0">Šifrovač</p>
-<p class="m0 tac">Šifrování textu <span class="dib">on-line</span></p>
+<p class="fp f8 lh1 m0 cd">Šifrovač</p>
+<p class="m0 tac cd">Šifrování textu <span class="dib">on-line</span></p>
 </div>
 </div>
 
@@ -304,8 +304,8 @@ fclose($handle);
 <div class="fl g1 m1 mb2 ac">
 <div class="i-1 s-logo"> </div>
 <div>
-<p class="fp f8 m0 lh1">Šifrovač</p>
-<p class="m0 tac">Šifrování textu <span class="dib">on-line</span></p>
+<p class="fp f8 m0 lh1 cd">Šifrovač</p>
+<p class="m0 tac cd">Šifrování textu <span class="dib">on-line</span></p>
 </div>
 </div>
 
@@ -364,7 +364,7 @@ Help
 
 <dialog id="napoveda">
 <div id="h_napoveda"></div>
-<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <h2>Co je Šifrovač</h2>
 <p>Šifrovač je&nbsp;aplikace, díky které můžete textové zprávy předávat bezpečněji. Uživatelé si&nbsp;mohou pomocí této aplikace a&nbsp;číselného kódu&nbsp;(ČK), předávat textové zprávy v&nbsp;šifrované podobě. Šifrovaný text je&nbsp;možné posílat například emailem, messengerem nebo&nbsp;smskou.</p>
@@ -381,8 +381,8 @@ Help
 <h2 id="n_uc">Číselný kód&#8239;(ČK)</h2>
 <p>Číselný kód (ve&nbsp;zkratce&#8239;ČK) je&nbsp;kombinací šesti čísel. Díky těmto číslům je&nbsp;možné textovou zprávu zašifrovat a&nbsp;pouze s&nbsp;použitím těchto šesti unikátních čísel zprávu opět rozšifrovat.</p>
 
-<h2 id="n_z_uc">Zakázané ČK</h2>
-<p>Některé kombinace ČK jsou zakázané kvůli bezpečnosti šifrovaných zpráv. Obvykle jsou to čísla v&nbsp;kombinaci stejná za&nbsp;sebou (například: 888, 111, 000) nebo čísla, která&nbsp;jsou postupová (například 123, 789, 210, 543). Dále číselné kombinace, které se&nbsp;opakují (například: 859 859, 763 763).</p>
+<h2 id="n_z_uc">Zakázané číselné kódy</h2>
+<p>Některé kombinace číselného kódu (ČK) jsou zakázané kvůli bezpečnosti šifrovaného textu. Obvykle jsou to čísla v&nbsp;kombinaci stejná za&nbsp;sebou (například: 888, 111, 000) nebo čísla, která&nbsp;jsou v&nbsp;číselné posloupnosti (například 123, 789, 210, 543). Dále číselné kombinace, které se&nbsp;opakují (například: 859 859, 763 763).</p>
 
 
 <h2>Otázky a&nbsp;odpovědi</h2>
@@ -430,7 +430,7 @@ Help
 
 <dialog id="o_aplikaci">
 <div id="h_o_aplikaci"></div>
-<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <h2>Aplikace Šifrovač</h2>
 <p>Aplikace Šifrovač je&nbsp;webovou aplikací <span class="dib">od&nbsp;Boar-cz</span>.</p>
@@ -459,7 +459,7 @@ Help
 
 
 <dialog id="kontakt">
-<div id="h_kontakt" class="d-h fl ac g05"><div @click="statstika=true" class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
+<div id="h_kontakt" class="d-h fl ac g05"><div @click="statstika=true" class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <h2>Kontakt</h2>
 <p>Programátora aplikace můžete kontaktovat pomocí emailu.</p>
@@ -486,7 +486,7 @@ Help
 
 
 <dialog id="ne_znaky">
-<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <div v-if="nep_znaky!=''">
 
@@ -513,7 +513,7 @@ Help
 
 
 <dialog id="ne_sifra">
-<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8">Šifrovač</p></div>
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 
 
