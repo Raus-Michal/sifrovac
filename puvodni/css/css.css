@@ -547,9 +547,8 @@ max-width:16rem;
 }
 }
 
-address p a
+address button
 {
-display:inline-block;
 margin:.5rem;
 padding:.25rem;
 border:1px dotted var(--b3);
