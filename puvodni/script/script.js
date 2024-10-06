@@ -1,40 +1,50 @@
+
+
 // VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU 
-const v_port={id:"h-con",
+const v_port={
+id:"h-con", // id hlavního kontejneru
+casovac:null, // časovač pro kontrolu, zda úprava výšky sledovaných objektů je v pořádku
 
 handleEvent(){
-if(window&&window.visualViewport) // test - zda je visualViewport podporováno 
+const o1=document.body; // sledovaný objekt 1
+const o2=document.getElementById(this.id); // sledovaný objekt 2
+const o1_v=parseInt(o1.clientHeight); // výška objektu 1
+const o2_v=parseInt(o2.clientHeight); // výška objektu 2
+const d_v=parseInt(window.innerHeight)||parseInt(document.documentElement.clientHeight); // Získání aktuální výšky viewportu
+if(o1_v!==d_v||o2_v!==d_v)
 {
-document.body.style.width=parseInt(window.screen.availWidth)+"px"; // přepsání hodnoty šířky, dostupnou šířkou zařízení, pomůže lepšímu přepočtu šířky visualViewport 
-document.body.style.minHeight=parseInt(window.screen.availHeight)+"px"; // přepsání hodnoty výšky, dostupnou výšky zařízení, pomůže lepšímu přepočtu výšky visualViewport 
-document.getElementById(this.id).style.minHeight=parseInt(window.screen.availHeight)+"px";  // přepsání hodnoty výšky, dostupnou výšky zařízení, pomůže lepšímu přepočtu výšky visualViewport 
-
-let vyska=parseInt(window.visualViewport.height); // výška obrazovky 
-let sirka=parseInt(window.visualViewport.width); // šířka obrazovky 
-document.body.style.width=`${sirka}px`;
-document.body.style.minHeight=`${vyska}px`;
-document.getElementById(this.id).style.minHeight=`${vyska}px`; 
-}},
+// pokud se výška jednoho ze sledovaných bojektů !== výšce viewportu
+o1.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+o2.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+clearTimeout(this.casovac); // vynuluje čaovač
+this.casovac=setTimeout(()=>{
+this.handleEvent; // funkce spustí samu sebe - rekluze
+},500); // za určitý čas provede rekluzi funkce, aby zjistil, zda došlo k nápravě
+}
+},
 
 aktivace(){
-if(window&&window.visualViewport) // test - zda je visualViewport podporováno
-{
-// Posluchače
-window.visualViewport.addEventListener("resize",this); // přidá posluchač na změnu velikosti obrazovky
-window.visualViewport.addEventListener("scroll",this); // přidá posluchač na scroolování obrazovky
-addEventListener("scroll",this); // přidá posluchač na scroolování obrazovky
-this.handleEvent(); // s aktivací spustí první srovnání obrazovky
-}}};
-
-v_port.aktivace(); // aktivuje visualViewport API
-setTimeout("v_port.handleEvent();",500); // aktivuje Visual View port API - pro pomalejší zařízení za 500ms
-setTimeout("v_port.handleEvent();",1000); // aktivuje Visual View port API - pro ještě pomalejší zařízení za 1000ms
-// KONEC - VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU
-
 // v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 document.getElementById("h-con").style.display="grid";
 document.getElementById("u-podminky").style.display="block";
 document.getElementById("z_uc").style.display="block";
 // KONEC v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
+
+if(window&&window.visualViewport) // test - zda je visualViewport podporováno
+{
+// Posluchače
+window.visualViewport.addEventListener("resize",this); // přidá posluchač na změnu velikosti viewportu
+window.visualViewport.addEventListener("scroll",this); // přidá posluchač na scroolování obrazovky ve viewportu
+}
+else
+{
+// pokud není dostupná podpora Visual Viewport API
+addEventListener("scroll",this); // přidá klasický posluchač na scroolování obrazovky
+}
+this.handleEvent(); // s aktivací spustí první srovnání velikosti sledovaných objektů
+}};
+v_port.aktivace(); // aktivuje visualViewport API
+// KONEC - VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU
 
 
 const app=Vue.createApp({

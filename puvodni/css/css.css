@@ -96,9 +96,10 @@ margin:0;
 
 #h-con,#u-podminky,#z_uc
 {display:none;} /* z důvodů první animace Loading - bude těmto oknům přidělen disply:none , který bude následně ve Vue v "háku" mounted změněn na display:grid;block;block */
-  
+
 .con
 {
+width:100%;
 min-height:100vh; /* řešeno ješte Javascriptrm visualViewport API */
 display:grid;
 grid-template-rows:auto 1fr auto auto;
