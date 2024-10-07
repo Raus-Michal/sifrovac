@@ -14,7 +14,7 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:update_time" content="2024-05-22T18:00:00+01:00">
+<meta property="og:update_time" content="2024-10-06T18:00:00+01:00">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Šifrovač">
 <meta property="og:type" content="website">
@@ -42,9 +42,9 @@
 "@type": "WebApplication",
 "@id": "WebApplication",
 "dateCreated": "2024-05-22",
-"dateModified": "2024-10-04",
+"dateModified": "2024-10-06",
 "datePublished": "2024-05-22",
-"version": "[1,1]",
+"version": "[1,2]",
 "mainEntityOfPage": "https://www.boar-cz.info",
 "description": "On-line šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.",
 "abstract": "On-line webová aplikace, která umí šifrovat a dešifrovat text. K tomuto šifrování a dešifrování textu používá šesti místného unikátního číselného kódu.",
@@ -161,7 +161,7 @@ fclose($handle);
 
 <div class="pr">
 <textarea v-model="text_o1" @paste="orez_area1" ref="area_o1" class="area mb05" cols="50" rows="10" title="Zde můžete vkládat text anebo šifrovaný text" :placeholder="placeholder_ta1" required></textarea>
-<p id="p_prazdne" class="zkopi" ref="oznNeVloz">Schránka je&nbsp;prázdná</p>
+<p ref="oznNeVloz" class="zkopi">Schránka je&nbsp;prázdná</p>
 </div>
 <p class="p-znak">znaků: {{znaku}}/{{max_znaku}}</p>
 
@@ -208,7 +208,7 @@ fclose($handle);
 </div>
 <div class="pr">
 <textarea v-model="text_o2" ref="area_o2" class="area mb05" cols="50" rows="10" title="Zde se zobrazuje šifrovaný/dešifrovaný text"  :placeholder="placeholder_ta2" readonly @keypress.prevent @paste.prevent @click.prevent></textarea>
-<p id="p_zkopirovano" class="zkopi" ref="oznCop">Zkopírováno</p>
+<p ref="oznCop" class="zkopi" >Zkopírováno</p>
 </div>
 
 <div class="fl g1 h2-5r w100">
@@ -316,14 +316,14 @@ fclose($handle);
 <form action="none.php" @submit.prevent="start">
 <div class="pr fl g2 jc mtb4">
 <div class="fl g1">
-<input @click="uc_z" :type="t1" ref="c1" v-model="uk1" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="1. číslice ČK" required>
-<input @click="uc_z" :type="t2" ref="c2" v-model="uk2" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="2. číslice ČK" required>
-<input @click="uc_z" :type="t3" ref="c3" v-model="uk3" size="1" min="0" max="9" class="kod"  pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="3. číslice ČK" required>
+<input @click="uc_z" :type="t[0]" ref="c1" v-model="uk1" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="1. číslice ČK" required>
+<input @click="uc_z" :type="t[1]" ref="c2" v-model="uk2" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="2. číslice ČK" required>
+<input @click="uc_z" :type="t[2]" ref="c3" v-model="uk3" size="1" min="0" max="9" class="kod"  pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="3. číslice ČK" required>
 </div>
 <div class="fl g1">
-<input @click="uc_z" :type="t4" ref="c4" v-model="uk4" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="4. číslice ČK" required>
-<input @click="uc_z" :type="t5" ref="c5" v-model="uk5" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="5. číslice ČK" required>
-<input @click="uc_z" :type="t6" ref="c6" v-model="uk6" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="6. číslice ČK" required>
+<input @click="uc_z" :type="t[3]" ref="c4" v-model="uk4" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="4. číslice ČK" required>
+<input @click="uc_z" :type="t[4]" ref="c5" v-model="uk5" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="5. číslice ČK" required>
+<input @click="uc_z" :type="t[5]" ref="c6" v-model="uk6" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="6. číslice ČK" required>
 </div>
 
 <div class="cod-v">
@@ -340,7 +340,7 @@ fclose($handle);
 <div v-else-if="nepovolen==true" class="fl ac g05 spH">
 <div class="i-5 s-2"> </div>
 <p class="m0 tac"><strong>Zakázaná číselná kombinace</strong></p>
-<button id="butt_nepovolen" class="dib bn bt p025" @click="o_dia('napoveda','n_z_uc','z_napoveda')" type="button" title="Help">
+<button ref="butt_nepovolen" class="dib bn bt p025" @click="o_dia('napoveda','n_z_uc','z_napoveda')" type="button" title="Help">
 <div class="i-8 s-2 b5w"> </div>
 Help
 </button>
@@ -436,7 +436,7 @@ Help
 <p>Aplikace Šifrovač je&nbsp;webovou aplikací <span class="dib">od&nbsp;Boar-cz</span>.</p>
 <p>Aplikace je&nbsp;naprogramovaná jazyky: HTML&#8239;5, CSS&#8239;3, JavaScript&#8239;ES6 a&nbsp;frameworkem Vue&#8239;3. K&nbsp;vytvoření šifrování bylo použito umělé inteligence, konkrétně robota ChatGPT.</p>
 <p>Aplikace je&nbsp;zdarma a&nbsp;podléhá autorským právům.</p>
-<p>Verze aplikace: 1.1</p>
+<p>Verze aplikace: 1.2</p>
 <p class="f8 mb05">Proč šifrovat text</p>
 <p>Tak jako každý dům je možné vykrást, tak i&nbsp;každou textovou zprávu je možné zcizit. Můžeme se&nbsp;rozhodnout, jestli u&nbsp;svého domu necháme dveře otevřené do&nbsp;kořán, anebo&nbsp;si dům co&nbsp;nejvíce zabezpečíme. Čím&nbsp;více zabezpečovacích prvků, tím větší bezpečí a&nbsp;více nepříjemností pro&nbsp;lupiče. Šifrovaný text, můžeme považovat za&nbsp;další zabezpečovací prvek, další dveře, které musí lupič překonat k&nbsp;tomu, aby získal svůj lup. V&nbsp;našem případě text zprávy. Šifrování textu pomocí této aplikace zvyšuje bezpečnost zasílání textových zpráv.</p>
 
@@ -449,6 +449,7 @@ Help
 <li>Aplikace podléhá autorským právům <span class="dib">Boar-cz</span>.</li>
 <li>Aplikace je&nbsp;zdarma a&nbsp;nesmí za&nbsp;její používání být&nbsp;požadován jakýkoli poplatek anebo&nbsp;služba.</li>
 <li>Aplikace uloží do&nbsp;zařízení informaci, že&nbsp;byl udělen souhlas s&nbsp;těmito podmínkymi.</li>
+<li>Aplikace uloží do&nbsp;zařízení data, pro&nbsp;fungování aplikace v&nbsp;režimu offline.</li>
 </ul>
 
 </div>
@@ -473,7 +474,7 @@ Help
 </Transition>
 </div>
 <input ref="in_email" class="w100 p025" size="17" type="text" :value="email"  title="Email na programátora" readonly>
-<p id="p_zkop_email" class="zkopi" ref="emailCop"><span class="tac dib w100">Zkopírováno</span></p>
+<p ref="emailCop" class="zkopi"><span class="tac dib w100">Zkopírováno</span></p>
 </form></div>
 
 <p>Do předmětu emailu programátorovi uveďte: Aplikace Šifrovač.</p>
@@ -533,9 +534,10 @@ Help
 </div>
 </dialog>
 
-
 </div> <!-- konec DIV App Vue -->
-<script src="script/vue.global.js"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
+<script src="servis-worker/reg_sw.js" defer> /* REGISTRACE Servisního pracovníka pro offline režim, parametr defer zajišťuje asynchroní načítání po načtení stránky */ </script>
+<script src="https://unpkg.com/vue@3"> /* script nenahrávat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
+<script src="script/kontrola-vue.js"></script>
 <script src="script/script.js?v=2"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
 </body>
 </html>
