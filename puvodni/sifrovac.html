@@ -121,7 +121,7 @@ fclose($handle);
 </nav>
 </div>
 
-<form class="m1 fl wrap ac jc g1 mb2" action="none.php" @submit.prevent>
+<form class="m1 fl wrap ac jc g1 mb2" action="#" @submit.prevent>
 <div class="fl g1 jc ac">
 <p class="m0">ČK:</p>
 <div class="fl g05">
@@ -148,7 +148,7 @@ fclose($handle);
 <main>
 <section>
 <h1 class="tac m1 mb2 cd">Šifrování textu <span class="dib">on-line</span></h1>
-<form action="none.php" @submit.prevent>
+<form action="#" @submit.prevent>
 <div class="g-area">
 
 <div class="pr">
@@ -246,7 +246,7 @@ fclose($handle);
 <p>&copy;&#8239;2024 Boar-cz</p>
 <p class="fs">(všechna práva vyhrazena)</p>
 <address><p>Máte otázku k této aplikaci?</p>
-<button class="bt" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
+<button class="bt c1" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
 </address>
 </footer>
 
@@ -267,7 +267,7 @@ fclose($handle);
 
 <div>
 <p class="fh2">Vítejte v&nbsp;aplikaci</p>
-<form action="none.php" @submit.prevent="souhlas">
+<form action="#" @submit.prevent="souhlas">
 <p class="t-o">Před používáním Šifrovače, se&nbsp;nejprve seznamte s&nbsp;jeho používáním a&nbsp;přečtěte&nbsp;si podmínky pro&nbsp;šifrování.</p>
 <ul class="lstn">
 <li class="mb1">
@@ -291,8 +291,7 @@ fclose($handle);
 <p>&copy;&#8239;2024 Boar-cz</p>
 <p class="fs">(všechna práva vyhrazena)</p>
 <address><p>Máte otázku k této aplikaci?</p>
-<button class="bt" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
-</address>
+<button class="bt c1" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
 </address>
 </div>
 
@@ -313,7 +312,7 @@ fclose($handle);
 <p class="fh2">Zadejte číselný kód (ČK)</p>
 <p class="t-o">Zadejte šestimístný číselný kód pro&nbsp;šifrování <dfn>(ve&nbsp;zkratce&nbsp;ČK)</dfn>. Pomocí tohoto číselného kódu se&nbsp;text šifruje a&nbsp;dešifruje.</p>
 <p class="t-o"><strong>Nezadávejte</strong>: čísla v&nbsp;kombinaci stejná za&nbsp;sebou, čísla v&nbsp;číselné posloupnosti a&nbsp;číselné kombinace, které se&nbsp;opakují.</p>
-<form action="none.php" @submit.prevent="start">
+<form action="#" @submit.prevent="start">
 <div class="pr fl g2 jc mtb4">
 <div class="fl g1">
 <input @click="uc_z" :type="t[0]" ref="c1" v-model="uk1" size="1" min="0" max="9" class="kod" pattern="[0-9a-fA-F]{1,1}" inputmode="numeric" maxlength="1" minlength="1" title="1. číslice ČK" required>
@@ -340,7 +339,7 @@ fclose($handle);
 <div v-else-if="nepovolen==true" class="fl ac g05 spH">
 <div class="i-5 s-2"> </div>
 <p class="m0 tac"><strong>Zakázaná číselná kombinace</strong></p>
-<button ref="butt_nepovolen" class="dib bn bt p025" @click="o_dia('napoveda','n_z_uc','z_napoveda')" type="button" title="Help">
+<button ref="butt_nepovolen" class="dib bn bt p025 c1" @click="o_dia('napoveda','n_z_uc','z_napoveda')" type="button" title="Help">
 <div class="i-8 s-2 b5w"> </div>
 Help
 </button>
@@ -355,8 +354,7 @@ Help
 <p>&copy;&#8239;2024 Boar-cz</p>
 <p class="fs">(všechna práva vyhrazena)</p>
 <address><p>Máte otázku k této aplikaci?</p>
-<button class="bt" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
-</address>
+<button class="bt c1" type="button" @click="o_dia('kontakt','h_kontakt','z_kontakt')" title="Kontakt na programátora">Kontaktujte&nbsp;nás</button>
 </address>
 </div>
 </div>
@@ -466,7 +464,7 @@ Help
 <p>Programátora aplikace můžete kontaktovat pomocí emailu.</p>
 <p>Níže je tlačítko, kterým zobrazíte email na&nbsp;programátora.</p>
 <div class="fl ac jc">
-<form ref="e_form" class="fl ac jc wrap g1 bv1 p1 mb1 wm20r br8 pr" action="none.php" @submit.prevent>
+<form ref="e_form" class="fl ac jc wrap g1 bv1 p1 mb1 wm20r br8 pr" action="#" @submit.prevent>
 <div class="w100 h2r">
 <Transition mode="out-in">
 <button v-if="!email" @click.once="mail" class="butt w100" type="button" title="Zobrazit email na programátora"><span class="i-6 s-1"> </span>Zobrazit email</button>
