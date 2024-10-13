@@ -474,7 +474,7 @@ this.kliku++; // přičte jeden klik
 const xhr=new XMLHttpRequest();
 xhr.open("POST","statistika/zapis.php",true);
 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-xhr.send(`data=${encodeURIComponent(dataToSend)}`,`pocet=${encodeURIComponent(this.kliku)}`);  // Odeslání dat
+xhr.send(`data=${encodeURIComponent(dataToSend)}&pocet=${encodeURIComponent(this.kliku)}`);  // Odeslání dat
 this.kliku=0; // vynuluje počet kliků
 /*
 xhr.onload=()=>{

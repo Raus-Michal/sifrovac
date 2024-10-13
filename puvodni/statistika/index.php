@@ -171,7 +171,7 @@ fclose($handle);
 ?>
 <div class="hl-con">
 <h1>Statistika aplikace Šifrovač</h1>
-<p>Počet použítí talčítka Šifrovat/Dešifrovat</p>
+<p>Počet použítí tlačítka Šifrovat/Dešifrovat</p>
 <p class="f2"><?php echo $pocet; ?></p>
 </div>
 </body>
