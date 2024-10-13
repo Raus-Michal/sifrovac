@@ -1,15 +1,23 @@
-// v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
-document.getElementById("h-con").style.display="grid";
-document.getElementById("u-podminky").style.display="block";
-document.getElementById("z_uc").style.display="block";
-// KONEC v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
+// Pokud nebude načteno Vue ze serveru, načte ho interně
+if(typeof Vue==="undefined"){
+// Pokud Vue není dostupné, načti lokální kopii
+console.log("Externí Vue knihovna NEBYLA načtena.");
+let script=document.createElement("script");
+script.src="script/vue.global.js"; // cesta k lokální kopii Vue
+document.body.appendChild(script);
 
-// Pokud nebylo načteno Vue ze serveru, načte ho interně
-if(typeof Vue==='undefined') {
-  // Pokud Vue není dostupné, načti lokální kopii
-  let script=document.createElement('script');
-  script.src='script/vue.global.js'; // cesta k lokální kopii Vue
-  document.head.appendChild(script);
+window.addEventListener("load",()=>{
+// načte potřebný script
+let script2=document.createElement("script");
+script2.defer=true;
+script2.src="script/script.js?v=3"; // cesta k hlavnímu scriptu aplikace
+document.body.appendChild(script2);
+});
 }else{
-  console.log("Externí Vue knihovna byla úspěšně načtena.");
+// Pokud je Vue dostupné, načte pouze potřebný script
+console.log("Externí Vue knihovna byla úspěšně načtena.");
+let script=document.createElement("script");
+script.defer=true;
+script.src="script/script.js?v=3"; // cesta k hlavnímu scriptu aplikace
+document.body.appendChild(script);
 }

@@ -533,9 +533,7 @@ Help
 </dialog>
 
 </div> <!-- konec DIV App Vue -->
-<script src="servis-worker/reg_sw.js" defer> /* REGISTRACE Servisního pracovníka pro offline režim, parametr defer zajišťuje asynchroní načítání po načtení stránky */ </script>
 <script src="https://unpkg.com/vue@3"> /* script nenahrávat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
-<script src="script/kontrola-vue.js"></script>
-<script src="script/script.js?v=2"> /* script nenahrábat asynchronně - není potřeba - do načtení je aktivní animace Loading... - načtení scriptu async by způsobilo kolaps! */ </script>
+<script src="script/kontrola-vue.js"> /* skript zkontroluje, zda byla načtena Vue knihovna z internetu, pokud nebyla, načte Vue knihovnu lokálně */ </script>
 </body>
 </html>

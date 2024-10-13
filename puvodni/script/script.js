@@ -91,6 +91,7 @@ localStorage.setItem(this.souhlas_Ls[0],this.souhlas_Ls[1]); // provede uložen�
 }
 this.podminky=false; // v-show schoví okno s podmínkami
 this.spustit=true; // v-show zobrazí okno s zadáním UC
+this.reg_sw(false); // funkce provede registraci Servis Workeru (hodnota false===o registraci zažádáno pomocí klik na button)
 },
 
 start(){
@@ -100,6 +101,34 @@ if(this.nepovolen==false)
 this.spustit=false;
 this.apka=true;
 }},
+
+reg_sw(pri_spusteni=true){
+// funkce provede registraci Servis Workeru
+if("serviceWorker" in navigator){
+// pokud je servis worker podporován v zařízen
+if(pri_spusteni)
+{
+// pokud je požadaven na registraci Servis Workeru při načtení stránky
+window.addEventListener("load",()=>{
+navigator.serviceWorker.register("sw.js",{scope:"/sifrovac/"}).then((registration)=>{
+console.log("ServiceWorker registrován v rozsahu: ",registration.scope);
+},(err)=>{
+console.log("ServiceWorker registrován s chybou: ",err);
+});
+});
+}
+else
+{
+// pokud je požadaven na registraci Servis Workeru po zmáčknutí buttonu
+navigator.serviceWorker.register("sw.js",{scope:"/sifrovac/"}).then((registration)=>{
+console.log("ServiceWorker registrován v rozsahu: ",registration.scope);
+},(err)=>{
+console.log("ServiceWorker registrován s chybou: ",err);
+});
+}
+}
+else{console.log("ServiceWorker není podporován");}
+},
 
 zobraz(){
 // funkce slouží k zobrazení a schování číselného kódu při zadání
@@ -866,11 +895,12 @@ console.log("Local storage is ready!");
 
 const byl_vydan_souhlas=localStorage.getItem(this.souhlas_Ls[0]); // z LocalStorage zjistí, zda vydal dříve uživatel Souhlas s podmínkami užívání aplikace
 
-if(byl_vydan_souhlas==this.souhlas_Ls[1])
+if(byl_vydan_souhlas===this.souhlas_Ls[1])
 {
 // pokud byl dříve vydán souhlas
 this.podminky=false; // v-show schová okno s podmínkami
 this.spustit=true; // v-show zobrazí okno s zadáním UC
+this.reg_sw(true); // funkce provede registraci Servis Workeru (parametr true znamená, že o registraci Servis workeru bylo požádáno při spuštění aplikace)
 }
 else
 {
