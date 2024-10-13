@@ -102,6 +102,28 @@ this.spustit=false;
 this.apka=true;
 }},
 
+reset(){
+// funkce zajistí reset aplikace
+this.apka=false; // vypne hlavní kontajner aplikace
+this.uk1=""; // ČK 1. číslo
+this.uk2=""; // ČK 2. číslo
+this.uk3=""; // ČK 3. číslo
+this.uk4=""; // ČK 4. číslo
+this.uk5=""; // ČK 5. číslo
+this.uk6=""; // ČK 6. číslo
+this.text_o1="";  // text v area 1
+this.text_o2=""; // text v area 2
+this.videt=false; //  v-if a v-else-if zobrazení UC při zadání
+l=this.t.length; // délka pole
+for(let i=0;i<l;i++)
+{
+this.t[i]="password"; // změní všechny input pro vstupní ČK na password
+}
+this.videt2=false, //  v-if a v-else-if zobrazení UC přímo v apce
+this.t_v="password"; // v-bind:type 1.-6. input number/password přímo v apce
+this.spustit=true; // zapne okno se zadáním ČK
+},
+
 reg_sw(pri_spusteni=true){
 // funkce provede registraci Servis Workeru
 if("serviceWorker" in navigator){

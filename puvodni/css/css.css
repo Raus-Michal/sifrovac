@@ -187,12 +187,12 @@ animation:loading 2s linear infinite running;
 100%{text-shadow:0px 0px 4px var(--b3);}
 }
   
-.i-1,.i-2,.i-3,.i-4,.i-5,.i-6,.i-7,.i-8,.i-9,.i-10,.i-11,.i-12,.i-13,.i-14,.i-15,.i-16,.i-17
+.i-1,.i-2,.i-3,.i-4,.i-5,.i-6,.i-7,.i-8,.i-9,.i-10,.i-11,.i-12,.i-13,.i-14,.i-15,.i-16,.i-17,.i-18
 {
 /* ikony */
 background-image:url('../svg/svg-full.svg');
 background-repeat:no-repeat;
-background-size:1700%; /* každá ikonka = 100% ; 17 ikonek = 1700% */
+background-size:1800%; /* každá ikonka = 100% ; 18 ikonek = 1800% */
 display:block;
 }
 .s-1
@@ -243,97 +243,103 @@ background-position:0 0;
 
 .i-2
 {
-/* facebook 6.25 */
-background-position:6.25% 0;
+/* facebook */
+background-position:5.882% 0;
 }
   
 .i-3
 {
 /* twitter */
-background-position:12.5% 0;
+background-position:11.765% 0;
 }
   
 .i-4
 {
 /* play */
-background-position:18.75% 0;
+background-position:17.647% 0;
 }
   
 .i-5
 {
 /* varování */
-background-position:25% 0;
+background-position:23.529% 0;
 }
   
 .i-6
 {
 /* vidět */
-background-position:31.25% 0;
+background-position:29.411% 0;
 }
   
 .i-7
 {
 /* nevidět */
-background-position:37.5% 0;
+background-position:35.294% 0;
 }
   
 .i-8
 {
 /* otazník */
-background-position:43.75% 0;
+background-position:41.176% 0;
 }
   
 .i-9
 {
 /* křížek */
-background-position:50% 0;
+background-position:47.059% 0;
 }
   
 .i-10
 {
 /* informace */
-background-position:56.25% 0;
+background-position:52.941% 0;
 }
   
 .i-11
 {
 /* přehodit */
-background-position:62.5% 0;
+background-position:58.823% 0;
 }
   
 .i-12
 {
 /* šifrovat */
-background-position:68.75% 0;
+background-position:64.705% 0;
 }
   
 .i-13
 {
 /* dešifrovat */
-background-position:75% 0;
+background-position:70.588% 0;
 }
   
 .i-14
 {
 /* vložit */
-background-position:81.25% 0;
+background-position:76.470% 0;
 }
   
 .i-15
 {
 /* delete */
-background-position:87.5% 0;
+background-position:82.352% 0;
 }
   
 .i-16
 {
 /* copy */
-background-position:93.75% 0;
+background-position:88.235% 0;
 }
   
 .i-17
 {
 /* Boar-cz logo */
+background-position:94.117% 0;
+}
+
+.i-18
+{
+/* Reset */
 background-position:100% 0;
 }
   
@@ -377,6 +383,7 @@ height:auto;}
 {
 font-family:"text",sans-serif;
 font-size:1rem;
+line-height:1.2;
 font-weight:600;
 display:-webkit-box;
 display:flex;
@@ -499,7 +506,7 @@ gap:1rem;
 }
 .area
 {
-width:calc(10rem + 12vw);
+width:calc(12rem + 12vw);
 max-width:27rem;
 margin:0;
 margin-bottom:.5rem;

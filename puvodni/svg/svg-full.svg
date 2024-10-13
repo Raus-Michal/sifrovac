@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="6800" height="400" viewBox="0 0 6800 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" stroke-width="10" stroke="rgb(167,163,192)" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" width="7200" height="400" viewBox="0 0 7200 400" stroke-width="10" stroke="rgb(167,163,192)" fill="none" preserveAspectRatio="xMidYMid meet">
 
 <summary>logo</summary>
 <circle stroke-width="20" cx="200" cy="200" r="180" />
@@ -150,5 +150,11 @@
 <circle cx="125" cy="195" r="25" />
 <circle cx="275" cy="195" r="25" />
 </g>
+</g>
+
+<summary>Reset 6800</summary>
+<g transform="translate(6800,0)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="30">
+<path d="M 137,354 A 146,156 0 0 1 66,179 146,156 0 0 1 208,62 146,156 0 0 1 349,179 146,156 0 0 1 279,354" />
+<path d="m 205,260 0,95" />
 </g>
 </svg>
