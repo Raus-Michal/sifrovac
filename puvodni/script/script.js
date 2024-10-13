@@ -76,6 +76,7 @@ pole:`A„7BCD0<KO=PQ@1RS"TUVW[XYZ“Á6ÉEFGŠŘŽabc!def)ghi*j3kl_mnop{ qr.stL
 nep_znaky:"", /* proměnná slouží k výisu nepovolených znaků k šifrování v Dialog okně */
 email:"", /* proměnná na binden value input zobrazení emailu */
 udalos_viditelnost:"", /* promměnná slouží k testování a používání visibilitychange API */
+kliku:0 // proměnná pro statistiku počítá počet kliků na tlačítko šifrovat/dešifrovat pokud je uživatel offline
 }},
     
 methods:{
@@ -424,32 +425,65 @@ startIndex+=100;
 }
 return decodedText; // Vrací dekódovaný text
 },
-  
 
-akce(){
-// Zmáčknutí tlačítka šifrovat anebo dešifrovat - odeslání dat pro statistiku
+statistika(){
+// funkce slouží k sbírání statistických dat
 
+if("localStorage" in window&&window["localStorage"]!==null)
+{
+// pokud je Local Storage API podporován
+let pocet_ls=localStorage.getItem("statistika"); // poček kliknutí uložených na local storage
+
+if(pocet_ls!==null)
+{
+// pokud byla nějáká data načtena
+pocet_ls=parseInt(pocet_ls); // převede string na number
+this.kliku=pocet_ls; // počet kliků == počet uložených kliků
+}
+}
+
+if(navigator.onLine)
+{
+// pokud je uživatel onLine
 const dataToSend="sifrovani";
 try{
 // Vytvoření AJAX požadavku
+this.kliku++; // přičte jeden klik
 const xhr=new XMLHttpRequest();
 xhr.open("POST","statistika/zapis.php",true);
 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-
+xhr.send(`data=${encodeURIComponent(dataToSend)}`,`pocet=${encodeURIComponent(this.kliku)}`);  // Odeslání dat
+this.kliku=0; // vynuluje počet kliků
 /*
 xhr.onload=()=>{
 // Reakce na dokončení požadavku
 if(xhr.status===200){
-// console.log('Data byla úspěšně odeslána.'); 
+console.log('Data byla úspěšně odeslána.');
 }else{
-// console.log('Došlo k chybě při odesílání dat.');
+console.log('Došlo k chybě při odesílání dat.');
 }};
 */
-xhr.send("data="+encodeURIComponent(dataToSend));  // Odeslání dat
 }
 catch(err){
 console.log("Statistická data neodeslána. Chyba:"+err);
+this.kliku++; // přičte jeden klik pokud došlo k chybě
 }
+}
+else
+{
+// pokud není uživatel onLine
+this.kliku++; // přičte jeden klik pokud není uživatel onLine
+}
+
+if("localStorage" in window&&window["localStorage"]!==null)
+{
+// pokud je Local Storage API podporován
+localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
+}},
+
+akce(){
+// Zmáčknutí tlačítka šifrovat anebo dešifrovat - odeslání dat pro statistiku
+this.statistika(); // funkce slouží k sbírání statistických dat
 
 const text_orez=this.text_o1.trim(); /* načte text z prvního okna area a ořeže metodou trim všechny prázdné znaky z obou stran řetězce */
 const text=text_orez.replace(/[\u00A0\u200A\u200B\u200C\u200D\u200E\u200F\u202A\u202B\u202C\u202D\u202E\u202F\u206A\u206B\u206C\u206D\u206E\u206F\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u2060\n\t\v\b\r\f]/g," "); // nahrazení uvedených znaků v řetězci mezerou, jedná se o problematické znaky různých mezer, které tvoří komplikace při šifrování a dešifrování; /.../g = označuje globální vyhledávání, což znamená, že se nahradí všechny výskyty těchto znaků v celém řetězci
