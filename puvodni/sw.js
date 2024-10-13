@@ -3,7 +3,7 @@ const CACHE_NAME="sifrovac-cache-v3";
 // Přidej externí Vue 3 knihovnu a další soubory do seznamu ke cache
 const urlsToCache=[
 "/sifrovac/",
-"/sifrovac/index.php",
+"/sifrovac/index.html",
 "/sifrovac/css/css.css",
 "/sifrovac/script/kontrola-vue.js",
 "/sifrovac/script/script.js",
@@ -67,7 +67,7 @@ return response; // Vrácení souboru z cache
 return fetch(event.request).catch(()=>{
 // Pokud fetch selže, vrátí fallback na hlavní stránku
 if(event.request.mode==="navigate"){
-return caches.match("/sifrovac/index.php");
+return caches.match("/sifrovac/index.html");
 }
 });
 })

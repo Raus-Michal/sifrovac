@@ -76,7 +76,6 @@ pole:`A„7BCD0<KO=PQ@1RS"TUVW[XYZ“Á6ÉEFGŠŘŽabc!def)ghi*j3kl_mnop{ qr.stL
 nep_znaky:"", /* proměnná slouží k výisu nepovolených znaků k šifrování v Dialog okně */
 email:"", /* proměnná na binden value input zobrazení emailu */
 udalos_viditelnost:"", /* promměnná slouží k testování a používání visibilitychange API */
-statstika:false // proměnná určuje jestli se objeví statistika kliknutí na tlačítko šifrovat nebo dešifrovat v okně pro kontakt
 }},
     
 methods:{

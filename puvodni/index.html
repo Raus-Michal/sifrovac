@@ -2,8 +2,8 @@
 <html lang="cs" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width , initial-scale=1.0 , viewport-fit=cover">
-<link rel="stylesheet" href="css/css.css?v=2">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<link rel="stylesheet" href="css/css.css?v=3">
 <title>Šifrovač - Šifrování textu on-line</title>
 <meta name="description" content="On-line šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.">
 <meta name="keywords" content="šifrování textu">
@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Šifrovač">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.boar-cz.info/sifrovac/">
-<meta name="robots" content="index , follow">
+<meta name="robots" content="index,follow">
 <meta property="twitter:card" content="summary_large_image">
 <!-- <meta property="twitter:site" content="@"> -->
 <meta property="twitter:url" content="https://www.boar-cz.info/sifrovac/">
@@ -65,14 +65,6 @@
 </head>
 
 <body>
-<?php
-$test = fopen("statistika/pocet.txt" , "a");
-fclose($test);
-$handle=fopen("statistika/pocet.txt" , "r+");
-$pocet=fread($handle,20);
-fclose($handle);
-?>
-
 <noscript>
 <div class="no-script">
 <p>Není zapnutý JavaScript!</p>
@@ -458,7 +450,7 @@ Help
 
 
 <dialog id="kontakt">
-<div id="h_kontakt" class="d-h fl ac g05"><div @click="statstika=true" class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
+<div id="h_kontakt" class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <h2>Kontakt</h2>
 <p>Programátora aplikace můžete kontaktovat pomocí emailu.</p>
@@ -476,7 +468,6 @@ Help
 </form></div>
 
 <p>Do předmětu emailu programátorovi uveďte: Aplikace Šifrovač.</p>
-<p v-show="statstika">Počet kliknutí na&nbsp;tlačítko Šifrovat anebo Dešifrovat:&nbsp;<?php echo $pocet; ?></p>
 </div>
 <div class="d-p fl je">
 <button id="z_kontakt" @click="z_dia('kontakt');" class="butt" type="button" title="Zavřít okno"><span class="i-9 s-1"> </span>Zavřít okno</button>
