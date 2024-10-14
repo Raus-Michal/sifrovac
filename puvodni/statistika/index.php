@@ -163,11 +163,7 @@ font-size:2rem;
 </head>
 <body>
 <?php
-$test = fopen("pocet.txt" , "a");
-fclose($test);
-$handle=fopen("pocet.txt" , "r+");
-$pocet=fread($handle,20);
-fclose($handle);
+include 'config/cteni.php';
 ?>
 <div class="hl-con">
 <h1>Statistika aplikace Šifrovač</h1>
