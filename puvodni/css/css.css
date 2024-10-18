@@ -100,6 +100,7 @@ margin:0;
 .con
 {
 width:100%;
+/* width:320px; */
 min-height:100vh; /* řešeno ješte Javascriptrm visualViewport API */
 display:grid;
 grid-template-rows:auto 1fr auto auto;
@@ -154,9 +155,7 @@ height:auto;
 {
 background:rgba(255,255,255,.15);
 border:1px dotted var(--b2);
-width:-webkit-fit-content;
-width:-moz-fit-content;
-width:fit-content;
+width:calc(100% - (2 * 1rem));
 max-width:30rem;
 margin:1rem;
 padding:1rem;
@@ -707,7 +706,7 @@ display:inline-block;
 
 .w8
 {
-width:8.125rem;
+width:8rem;
 }
 
 .wm20r
