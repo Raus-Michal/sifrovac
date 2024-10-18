@@ -97,6 +97,8 @@ margin:0;
 #h-con,#u-podminky,#z_uc
 {display:none;} /* z důvodů první animace Loading - bude těmto oknům přidělen disply:none , který bude následně ve Vue v "háku" mounted změněn na display:grid;block;block */
 
+
+
 .con
 {
 width:100%;
@@ -160,7 +162,75 @@ max-width:30rem;
 margin:1rem;
 padding:1rem;
 border-radius:16px;
-}  
+}
+
+.prehl /* okno Přehled šifrování a dešifrování */
+{
+display:none;
+width:100vw;
+min-height:100vh;
+background-color:var(--b4);
+}
+
+.prehl-h /* hlavička okna Přehled šifrování a dešifrování */
+{
+display:flex;
+gap:1rem;
+justify-content:space-between;
+position:-webkit-sticky;
+position:sticky;
+left:0;
+top:0;
+z-index:2;
+width:100%;
+background-color:var(--b2);
+border-bottom:1px solid black;
+padding:1rem;
+}
+
+.prehl-t /* tělo okna Přehled šifrování a dešifrování */
+{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:1rem;
+width:100%;
+padding:1rem;
+}
+
+.prehl-t div /* Box šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování */
+{
+width:100%;
+max-width:40ch;
+}
+
+.prehl-t div p /* pro všechny p v Box šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování - HTML prvek se přidává JavaScriptem */
+{
+hyphens:auto;
+text-align:justify;
+overflow-wrap:anywhere;
+}
+
+.prehl-t div div /* Hlavička v Boxu šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování - HTML prvek se přidává JavaScriptem */
+{
+display:flex;
+gap:.5rem;
+margin-bottom:.5rem;
+align-items:center;
+}
+
+.prehl-t div div p /* první p v Box šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování - HTML prvek se přidává JavaScriptem */
+{
+text-align:center;
+font-weight:600;
+margin-bottom:0;
+}
+
+.prehl-t div div p span /* span v p v Box šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování - HTML prvek se přidává JavaScriptem */
+{
+display:inline-block;
+}
+
 
 .an-l
 {
@@ -404,6 +474,14 @@ flex-direction:column;
 gap:.25rem;
 width:100%;
 min-width:8rem;
+}
+
+.buttR /* speciální úprava class .butt pro buttton Křížek-Zavřít v rohu okna */
+{
+width:auto;
+font-size:1rem;
+flex-direction:column;
+gap:.25rem;
 }
 
 .b5w
@@ -795,6 +873,11 @@ padding:.25rem;
 .m1
 {
 margin:1rem;
+}
+
+.ma
+{
+margin:auto;
 }
 
 .m0

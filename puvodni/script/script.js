@@ -2,24 +2,29 @@
 document.getElementById("h-con").style.display="grid";
 document.getElementById("u-podminky").style.display="block";
 document.getElementById("z_uc").style.display="block";
+document.getElementById("okno-prehled").style.display="block";
 // KONEC v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 
 // VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU 
 const v_port={
 id:"h-con", // id hlavního kontejneru
+id2:"okno-prehled", // id okna Přehled šifrování a dešifrování
 casovac:null, // časovač pro kontrolu, zda úprava výšky sledovaných objektů je v pořádku
 
 handleEvent(){
 const o1=document.body; // sledovaný objekt 1
 const o2=document.getElementById(this.id); // sledovaný objekt 2
+const o3=document.getElementById(this.id2); // sledovaný objekt 3
 const o1_v=parseInt(o1.clientHeight); // výška objektu 1
 const o2_v=parseInt(o2.clientHeight); // výška objektu 2
+const o3_v=parseInt(o3.clientHeight); // výška objektu 3
 const d_v=parseInt(window.innerHeight)||parseInt(document.documentElement.clientHeight); // Získání aktuální výšky viewportu
-if(o1_v!==d_v||o2_v!==d_v)
+if(o1_v!==d_v||o2_v!==d_v||o3_v!==d_v)
 {
 // pokud se výška jednoho ze sledovaných bojektů !== výšce viewportu
 o1.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
 o2.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+o3.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
 clearTimeout(this.casovac); // vynuluje čaovač
 this.casovac=setTimeout(()=>{
 this.handleEvent; // funkce spustí samu sebe - rekluze
@@ -52,6 +57,7 @@ loading:true, // v-show zobrazení animace Loading... před načtením aplikace 
 apka:false, /* v-show zobrazení hlavní strany aplikace a schování startovacího okna */
 podminky:false, /* utčuje zda uživatel v startovacím okně souhlasil s podmínkami používání šifrovače */
 spustit:false, /* v-show zobrazení okno s UC startovacího okna */
+prehled:false, // v-show zobrazí okno s přehledem šifrování a dešifrování
 souhlas_Ls:["souhlas","vydan"], // proměnná určuje string pro uložení souhlasu v Localstorage [klíč,data]
 uk1:"", /* UC 1. číslo */
 uk2:"", /* UC 2. číslo */
@@ -122,6 +128,8 @@ this.t[i]="password"; // změní všechny input pro vstupní ČK na password
 this.videt2=false, //  v-if a v-else-if zobrazení UC přímo v apce
 this.t_v="password"; // v-bind:type 1.-6. input number/password přímo v apce
 this.spustit=true; // zapne okno se zadáním ČK
+const prehled_telo=this.$refs.telo_prehled; // DIV tělo okna Přehled šifrování a dešifrování
+prehled_telo.innerHTML=""; // vymaže obsah DIV tělo okna Přehled šifrování a dešifrování
 },
 
 reg_sw(pri_spusteni=true){
@@ -447,7 +455,81 @@ startIndex+=100;
 }
 return decodedText; // Vrací dekódovaný text
 },
+async vlozit_prehled(akce="",text=""){
+// funkce slouží k vložení textu do okna Přehled šifrování a dešifrování akce="" / šifrování anebo dešifrování ; text="" - text který se buď šifroval anebo dešifroval
+if((akce===""||text==="")&&(akce!=="Šifrování"||akce!=="Dešifrování")) /* ||akce!=="Šifrování"||akce!=="Dešifrování" */
+{
+return; // pokud nebude zaslána do funkce jedna z potřebných hodnot bude return a funkce se ukončí, Fukce vyžaduje striktně zaslat akce==="Šifrování" anebo "Dešifrování"
+}
 
+let class_ico=""; // zde bude název class ico pro Šifrování anebo Dešifrování
+
+if(akce==="Šifrování")
+{
+class_ico="i-12"; // název css class pro šifrování
+}
+else
+{
+class_ico="i-13"; // název css class pro dešifrování
+}
+
+const dat=new Date(); // objekt datum
+dat.den_t=dat.getDay(); // den v týdnu, kde 0 je neděle a 1 je pondělí
+dat.den=dat.getDate(); // den v měsíci
+dat.mesic=dat.getMonth(); // měsíc kde leden je 0 a prosinec 11
+dat.hodin=dat.getHours(); // aktuální hodina
+dat.minut=dat.getMinutes(); // aktuální minuta
+dat.sekund=dat.getSeconds(); // aktuální sekunda
+
+const dny=["neděle","pondělí","úterý","středa","čtvrtek","pátek","sobota"]; // dne v týdnu seřazeny v poli pro potřeby vestavěné funkce getDay()
+
+if(dat.minut<10)
+{
+dat.minut=`0${dat.minut}`; // přidání 0 před jednomístné minuty
+}
+
+if(dat.sekund<10)
+{
+dat.sekund=`0${dat.sekund}`; // přidání 0 před jednomístné sekundy
+}
+
+const prehled_telo=this.$refs.telo_prehled; // DIV tělo okna Přehled šifrování a dešifrování
+
+const objekt_hlavicka=document.createElement("div"); // vytvoří DIV pro hlavičku BOXU
+const objekt_hlavickaP=document.createElement("p"); // vytvoří P pro text hlavičky
+const objekt_ico=document.createElement("span"); // vytvoří SPAN pro ICO hlavičky
+objekt_ico.setAttribute("class",`s-1 ${class_ico}`); // přidání class třídy pro ICO do hlavičky Šifrování/Dešifrování
+const objekt_hlavickaS2=document.createElement("span"); // span display=inline-block pro čas hlavičky
+const objekt_hlavickaS3=document.createElement("span"); // span display=inline-block pro datum hlavičky
+
+
+const hlavicka_akce=document.createTextNode(`${akce} - `); // vytvoří textový uzel hlavičky šifrování/dešifrování
+const hlavicka_cas=document.createTextNode(`${dat.hodin}:${dat.minut}:${dat.sekund} hod.`); // vytvoří textový uzel hlavičky ČAS
+const hlavicka_date=document.createTextNode(`(${dny[dat.den_t]} ${dat.den}.${dat.mesic+1}.)`); // vytvoří textový uzel hlavičky DATUM
+
+objekt_hlavickaS2.appendChild(hlavicka_cas); // přidá do SPANu pro čas textový uzel s časem
+objekt_hlavickaS3.appendChild(hlavicka_date); // přidá do SPANu pro datum textový uzel s datumem
+
+
+objekt_hlavickaP.appendChild(hlavicka_akce); // přidá do P hlavičky text šifrováno/dešifrováno
+objekt_hlavickaP.appendChild(objekt_hlavickaS2); // přidá do P hlavičky SPAN s časem
+objekt_hlavickaP.appendChild(document.createTextNode(" ")); // přidá do P hlavičky mezeru mezi SPANY
+objekt_hlavickaP.appendChild(objekt_hlavickaS3); // přidá do P hlavičky SPAN s datumem
+objekt_hlavicka.appendChild(objekt_ico); // přidá ico šifrování/dešifrování do DIV hlavičky
+objekt_hlavicka.appendChild(objekt_hlavickaP); // přidá P hlavičky do DIV hlavičky
+
+const objekt_telo=document.createElement("p"); // vytvoří P HTML element pro text obsahu šifrováno/dešifrováno
+const obsah_text=document.createTextNode(text); // vytvoří textový uzel pro text obsahu šifrováno/dešifrováno
+objekt_telo.appendChild(obsah_text); // přidá textový uzel pro text obsahu šifrováno/dešifrováno do P HTML element pro text obsahu šifrováno/dešifrováno
+
+const novy_objekt=document.createElement("div"); // vytvoří hlavní BOX pro kompletní informaci Šifrováno/Dešifrováno
+
+novy_objekt.appendChild(objekt_hlavicka); // přidá hlavičku do hlavního BOXu pro kompletní informaci Šifrováno/Dešifrováno
+novy_objekt.appendChild(objekt_telo); // přidá P HTML element s textem obsahu šifrováno/dešifrováno do hlavního BOXu pro kompletní informaci Šifrováno/Dešifrováno
+
+prehled_telo.appendChild(novy_objekt); // přidá hlavní BOX pro kompletní informaci Šifrováno/Dešifrováno do těla okna Přehled šifrování a dešifrování
+
+},
 statistika(){
 // funkce slouží k sbírání statistických dat
 
@@ -555,6 +637,7 @@ const d_text=text.slice(1,u_delka); /* z proměnná text vyřízne část řetě
 this.dekodovani(d_text,key)
 .then(new_text=>{
 this.text_o2=new_text;  /* převede dekódovaný text do druhého okna area */
+this.vlozit_prehled("Dešifrování",new_text); // funkce zajistí, že text který byl dešifrován bude přidán do okna Přehled Šifrování a dešifrování
 })
 .catch(error=>{
 console.error("Chyba při dekódování: ",error);
@@ -568,6 +651,7 @@ this.kodovani(text,key)
 .then(new_text=>{
 const k_text=`#${new_text}#`; /* přidá na začátek a konec zakódovaného řetězce # ,aby určil počátek a konec kódování */
 this.text_o2=k_text;  /* převede kódovaný text do druhého okna area */
+this.vlozit_prehled("Šifrování",text); // funkce zajistí, že text který se šifroval bude přidán do okna Přehled Šifrování a dešifrování
 })
 .catch(error=>{
 console.error("Chyba při zakódování:", error);
@@ -623,6 +707,24 @@ orez_area1(){
 setTimeout(()=>{
 this.text_o1=this.text_o1.trim();} // ořeže prázdné znaky textu area1
 ,250); // zpoždění 250ms je na místě, jinak akci neprovede
+},
+prehled_on(){
+// funkce zajišťuje zapnutí okna Přehled šifrování a dešifrování
+this.apka=!this.apka; // v-show - vypnutí hlavního kontajneru aplikace
+this.prehled=!this.prehled; // v-show - zapnutí okna Přehled šifrování a dešifrování
+
+/*
+zatím řešeno 100vw
+this.$refs.okno_prehled.style.width=`${parseInt(window.innerWidth)}px`; // šířka okna Přehled šifrování a dešifrování bude šířkou obrazovky zařízení uživatele
+*/
+
+
+},
+prehled_off(){
+// funkce zajišťuje vypnutí okna Přehled šifrování a dešifrování
+this.prehled=false; // v-show - vypnutí okna Přehled šifrování a dešifrování
+this.apka=true; // v-show - zapnutí hlavního kontajneru aplikace
+
 }
 },
 
