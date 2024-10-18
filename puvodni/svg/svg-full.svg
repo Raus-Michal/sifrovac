@@ -51,7 +51,6 @@
 
 <summary>otaznik 2800</summary>
 <g stroke-width="3" stroke="rgba(45,45,18,1)" transform="translate(2800,0)">
-<circle cx="200" cy="200" r="197" />
 <text fill="rgba(45,45,18,1)" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:350px;line-height:1.25;font-family:sans-serif;" x="97" y="334">?</text>
 </g>
 
@@ -63,7 +62,6 @@
 
 <summary>informace 3600</summary>
 <g stroke-width="3" stroke="rgba(45,45,18,1)" transform="translate(3600,0)">
-<circle cx="200" cy="200" r="197" />
 <path stroke="black" fill="rgba(45,45,18,1)" d="m 132.8,151.5 h 135.4 v 35.4 h -40.6 v 107.3 h 40.6 v 35.4 H 132.8 v -35.4 h 40.6 V 186.9 h -40.6 z" />
 <circle stroke="black" fill="rgba(45,45,18,1)" cx="200" cy="89" r="35" />
 </g>
@@ -154,7 +152,7 @@
 
 <summary>Reset 6800</summary>
 <g transform="translate(6800,0)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="30">
-<path d="M 137,354 A 146,156 0 0 1 66,179 146,156 0 0 1 208,62 146,156 0 0 1 349,179 146,156 0 0 1 279,354" />
-<path d="m 205,260 0,95" />
+<path d="M 130,84 C 73,115 43,181 60,244 76,307 134,351 200,351 265,351 323,307 339,244 355,181 331,116 274,84" />
+<path d="M 204,167 V 50" />
 </g>
 </svg>

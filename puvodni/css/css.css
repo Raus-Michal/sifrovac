@@ -740,12 +740,13 @@ font-size:.8rem;
 font-size:1.25rem;
 }
 
-.fh2
+.fh2,p.fh2
 {
 font-family:"nadpis";
 font-size:1.5rem;
 font-weight:bold;
 margin-bottom:.5rem;
+text-align:left;
 }
 
 .f6
