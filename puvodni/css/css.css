@@ -57,15 +57,19 @@ legend{padding:0 .5rem;}
 /* KONEC NORMALIZACE */
 
 @font-face{
-font-display:fallback;
-font-family:"nadpis";
-src:url("../font/museo-moderno.ttf");
+font-display:fallback; /* vlastnost fontu, která zobrazí font se zpožděním 0.3s, kdy už by měl být načten - sníží se performace webu */
+font-family:"nadpis"; /* vlastní název fontu, který se posléze bude dále používat v CSS */
+src:url("../font/museo-moderno.woff2") format("woff2 supports variations"),url("../font/museo-moderno.woff2") format("woff2-variations"),url("../font/museo-moderno.woff2") format("woff2"),url("../font/museo-moderno.woff") format("woff"); /* cesta k fontu se určuje vzhledem k umístění CSS souboru */
+font-weight:100 900; /* určuje rozsah šířky písma použitého v CSSku (v projektu) */
+font-style:normal;
 }
 
 @font-face{
-font-display:fallback;
-font-family:"text";
-src:url("../font/exo2.ttf");
+font-display:fallback; /* vlastnost fontu, která zobrazí font se zpožděním 0.3s, kdy už by měl být načten - sníží se performace webu */
+font-family:"text"; /* vlastní název fontu, který se posléze bude dále používat v CSS */
+src:url("../font/exo2.woff2") format("woff2 supports variations"),url("../font/exo2.woff2") format("woff2-variations"),url("../font/exo2.woff2") format("woff2"),url("../font/exo2.woff") format("woff"); /* cesta k fontu se určuje vzhledem k umístění CSS souboru */
+font-weight:100 900; /* určuje rozsah šířky písma použitého v CSSku (v projektu) */
+font-style:normal;
 }
 
 :root
