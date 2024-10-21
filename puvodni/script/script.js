@@ -496,29 +496,36 @@ dat.sekund=`0${dat.sekund}`; // přidání 0 před jednomístné sekundy
 const prehled_telo=this.$refs.telo_prehled; // DIV tělo okna Přehled šifrování a dešifrování
 
 const objekt_hlavicka=document.createElement("div"); // vytvoří DIV pro hlavičku BOXU
-const objekt_hlavickaP=document.createElement("p"); // vytvoří P pro text hlavičky
 const objekt_ico=document.createElement("span"); // vytvoří SPAN pro ICO hlavičky
 objekt_ico.setAttribute("class",`s-1 ${class_ico}`); // přidání class třídy pro ICO do hlavičky Šifrování/Dešifrování
-const objekt_hlavickaS2=document.createElement("span"); // span display=inline-block pro čas hlavičky
-const objekt_hlavickaS3=document.createElement("span"); // span display=inline-block pro datum hlavičky
+objekt_hlavicka.appendChild(objekt_ico); // přidá ico šifrování/dešifrování do DIV hlavičky
 
-
-const hlavicka_akce=document.createTextNode(`${akce} - `); // vytvoří textový uzel hlavičky šifrování/dešifrování
 const hlavicka_cas=document.createTextNode(`${dat.hodin}:${dat.minut}:${dat.sekund} hod.`); // vytvoří textový uzel hlavičky ČAS
 const hlavicka_date=document.createTextNode(`(${dny[dat.den_t]} ${dat.den}.${dat.mesic+1}.)`); // vytvoří textový uzel hlavičky DATUM
 
+const objekt_hlavickaS2=document.createElement("span"); // span display=inline-block pro čas hlavičky
+const objekt_hlavickaS3=document.createElement("span"); // span display=inline-block pro datum hlavičky
 objekt_hlavickaS2.appendChild(hlavicka_cas); // přidá do SPANu pro čas textový uzel s časem
+objekt_hlavickaS2.setAttribute("style","font-size:.8rem;"); // zmenšení SPAN s časem
 objekt_hlavickaS3.appendChild(hlavicka_date); // přidá do SPANu pro datum textový uzel s datumem
+objekt_hlavickaS3.setAttribute("style","font-size:.8rem;font-weight:400;"); // zmenšení SPAN s datumem a odebrání tučnosti
+
+const objekt_hlavickaA=document.createElement("p"); // vytvoří P text akce Šifrování/Dešifrování
+objekt_hlavickaA.setAttribute("style","width:6.5rem;"); // přidání styl pevné šířky akce Šifrování/Dešifrování
+const hlavicka_akce=document.createTextNode(akce); // vytvoří textový uzel hlavičky šifrování/dešifrování
+objekt_hlavickaA.appendChild(hlavicka_akce); // k P hlavčky akce Šifrování/Dešifrování přidán text
+objekt_hlavicka.appendChild(objekt_hlavickaA); // přidá P hlavičky AKCE Šifrování/Dešifrování
 
 
-objekt_hlavickaP.appendChild(hlavicka_akce); // přidá do P hlavičky text šifrováno/dešifrováno
+const objekt_hlavickaP=document.createElement("p"); // vytvoří P pro čas a datum hlavičky
 objekt_hlavickaP.appendChild(objekt_hlavickaS2); // přidá do P hlavičky SPAN s časem
 objekt_hlavickaP.appendChild(document.createTextNode(" ")); // přidá do P hlavičky mezeru mezi SPANY
 objekt_hlavickaP.appendChild(objekt_hlavickaS3); // přidá do P hlavičky SPAN s datumem
-objekt_hlavicka.appendChild(objekt_ico); // přidá ico šifrování/dešifrování do DIV hlavičky
+
 objekt_hlavicka.appendChild(objekt_hlavickaP); // přidá P hlavičky do DIV hlavičky
 
 const objekt_telo=document.createElement("p"); // vytvoří P HTML element pro text obsahu šifrováno/dešifrováno
+objekt_telo.setAttribute("style","overflow-wrap:anywhere;"); // přidání styl pro lepší zalamování dlouhých textů
 const obsah_text=document.createTextNode(text); // vytvoří textový uzel pro text obsahu šifrováno/dešifrováno
 objekt_telo.appendChild(obsah_text); // přidá textový uzel pro text obsahu šifrováno/dešifrováno do P HTML element pro text obsahu šifrováno/dešifrováno
 
