@@ -1,3 +1,4 @@
+
 // v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 document.getElementById("h-con").style.display="grid";
 document.getElementById("u-podminky").style.display="block";
@@ -5,52 +6,7 @@ document.getElementById("z_uc").style.display="block";
 document.getElementById("okno-prehled").style.display="block";
 // KONEC v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 
-// VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU 
-const v_port={
-id:"h-con", // id hlavního kontejneru
-id2:"okno-prehled", // id okna Přehled šifrování a dešifrování
-casovac:null, // časovač pro kontrolu, zda úprava výšky sledovaných objektů je v pořádku
-
-handleEvent(){
-const o1=document.body; // sledovaný objekt 1
-const o2=document.getElementById(this.id); // sledovaný objekt 2
-const o3=document.getElementById(this.id2); // sledovaný objekt 3
-const o1_v=parseInt(o1.clientHeight); // výška objektu 1
-const o2_v=parseInt(o2.clientHeight); // výška objektu 2
-const o3_v=parseInt(o3.clientHeight); // výška objektu 3
-const d_v=parseInt(window.innerHeight)||parseInt(document.documentElement.clientHeight); // Získání aktuální výšky viewportu
-if(o1_v!==d_v||o2_v!==d_v||o3_v!==d_v)
-{
-// pokud se výška jednoho ze sledovaných bojektů !== výšce viewportu
-o1.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
-o2.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
-o3.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
-clearTimeout(this.casovac); // vynuluje čaovač
-this.casovac=setTimeout(()=>{
-this.handleEvent; // funkce spustí samu sebe - rekluze
-},500); // za určitý čas provede rekluzi funkce, aby zjistil, zda došlo k nápravě
-}
-},
-
-aktivace(){
-if(window&&window.visualViewport) // test - zda je visualViewport podporováno
-{
-// Posluchače
-window.visualViewport.addEventListener("resize",this); // přidá posluchač na změnu velikosti viewportu
-window.visualViewport.addEventListener("scroll",this); // přidá posluchač na scroolování obrazovky ve viewportu
-}
-else
-{
-// pokud není dostupná podpora Visual Viewport API
-addEventListener("scroll",this); // přidá klasický posluchač na scroolování obrazovky
-}
-this.handleEvent(); // s aktivací spustí první srovnání velikosti sledovaných objektů
-}};
-v_port.aktivace(); // aktivuje visualViewport API
-// KONEC - VisualViewport API - úprva velikosti zobrazení BODY + HLAVNÍHO KONTEJNERU
-
 const app=Vue.createApp({
-
 data(){
 return {
 loading:true, // v-show zobrazení animace Loading... před načtením aplikace //
@@ -1074,6 +1030,49 @@ clearTimeout(this.casovac1); // vynuluje časovač
 mounted(){
 /* Hák mounted provede akci, která je v něm uvedena po načtení stránky */
 
+// VisualViewport API - úprva velikosti zobrazení BODY, HLAVNÍHO KONTEJNERU a Okna Přehled šifrování a dešifrování
+const v_port={
+id:"h-con", // id hlavního kontejneru
+id2:"okno-prehled", // id okna Přehled šifrování a dešifrování
+casovac:null, // časovač pro kontrolu, zda úprava výšky sledovaných objektů je v pořádku
+
+handleEvent(){
+const o1=document.body; // sledovaný objekt 1
+const o2=document.getElementById(this.id); // sledovaný objekt 2
+const o3=document.getElementById(this.id2); // sledovaný objekt 3
+const o1_v=parseInt(o1.clientHeight); // výška objektu 1
+const o2_v=parseInt(o2.clientHeight); // výška objektu 2
+const o3_v=parseInt(o3.clientHeight); // výška objektu 3
+const d_v=parseInt(window.innerHeight)||parseInt(document.documentElement.clientHeight); // Získání aktuální výšky viewportu
+if(o1_v!==d_v||o2_v!==d_v||o3_v!==d_v)
+{
+// pokud se výška jednoho ze sledovaných bojektů !== výšce viewportu
+o1.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+o2.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+o3.style.minHeight=`${d_v}px`; // upraví minimální výšku sledovaného objektu na výšku viewportu
+clearTimeout(this.casovac); // vynuluje čaovač
+this.casovac=setTimeout(()=>{
+this.handleEvent; // funkce spustí samu sebe - rekluze
+},500); // za určitý čas provede rekluzi funkce, aby zjistil, zda došlo k nápravě
+}
+},
+
+aktivace(){
+if(window&&window.visualViewport) // test - zda je visualViewport podporováno
+{
+// Posluchače
+window.visualViewport.addEventListener("resize",this); // přidá posluchač na změnu velikosti viewportu
+window.visualViewport.addEventListener("scroll",this); // přidá posluchač na scroolování obrazovky ve viewportu
+}
+else
+{
+// pokud není dostupná podpora Visual Viewport API
+addEventListener("scroll",this); // přidá klasický posluchač na scroolování obrazovky
+}
+this.handleEvent(); // s aktivací spustí první srovnání velikosti sledovaných objektů
+}};
+v_port.aktivace(); // aktivuje visualViewport API
+
 this.$refs.uvod_animace.style.animationPlayState="paused"; // zastaví úvodní animaci Loading...
 this.loading=false; // v-show : vypne úvodní animaci Loading...
 
@@ -1134,13 +1133,9 @@ obj.href=`javascript:${text}`; // přepíše href odkazu na nový JavaScriptový
 }
 };
 prepis_odkazy(); // funkce přepíše odkazy na sociální sítě Facebook, síť X a Webové stránky výrobce aplikace
+
 },
 
 });
     
 app.mount('#app');
-
-
-
-
-
