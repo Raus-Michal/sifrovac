@@ -1,4 +1,4 @@
-const CACHE_NAME="sifrovac-cache-v3";
+const CACHE_NAME="sifrovac-cache-v4";
 
 // Přidej externí Vue 3 knihovnu a další soubory do seznamu ke cache
 const urlsToCache=[

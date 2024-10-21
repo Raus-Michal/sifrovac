@@ -414,8 +414,8 @@ background-position:100% 0;
 .kod
 {
 font-size:1rem;
-width:1.5rem;
-height:2rem;
+width:1.75rem;
+height:2.5rem;
 padding:.25rem;
 text-align:center;
 border:1px solid var(--b1);
@@ -427,7 +427,7 @@ border:1px solid var(--b1);
 .kod
 {
 font-size:1.5rem;
-width:2.5rem;
+width:2.25rem;
 height:3rem;
 padding:.5rem;
 }}
@@ -619,14 +619,13 @@ width:100%;
 height:4rem;
 }
 
-/* mobil L a větší */
-@media only screen and (min-width:27em)
+/* více jak 500px */
+@media only screen and (min-width:31.25em)
 {
 .ul-soc
 {
-width:12rem;
-width:calc(12rem + 2vw);
-max-width:16rem;
+width:auto;
+flex:1;
 }
 }
 
@@ -746,6 +745,7 @@ font-size:1.5rem;
 font-weight:bold;
 margin-bottom:.5rem;
 text-align:left;
+hyphens:manual;
 }
 
 .f6
