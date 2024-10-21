@@ -10,14 +10,14 @@ if (file_exists($file_data)){
 // pokud existuje JSON soubor s daty
 $jsonData = file_get_contents($file_data); // načte soubor JSON
 $data = json_decode($jsonData, true); // dekóduje data JSON
+$old_pocet_kliku=$data["klik"]; // načte starý počet kliků
+$data["klik"]=$old_pocet_kliku+$pocet; // přičte stávající kliky k nově zaslaným klikům
 }
 else
 {
 // pokud soubor $JSON s daty neexistuje
-$data = [{"klik":0}]; // budou data prozatím pole s 0 kliků
+$data = array("klik"=>0); // budou data prozatím pole s 0 kliků
 }
-$old_pocet_kliku=$data["klik"]; // načte starý počet kliků
-$data["klik"]=$old_pocet_kliku+$pocet; // přičte stávající kliky k nově zaslaným klikům
 $newJsonData = json_encode($data, JSON_PRETTY_PRINT); // aktualizovaná data zakóduje na JSON formát
 file_put_contents($file_data, $newJsonData); // přepíše stávající JSON s aktualizovanými daty
 }

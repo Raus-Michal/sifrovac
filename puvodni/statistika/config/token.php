@@ -10,7 +10,7 @@ if($token_od_uzivatele)
 {
 // pokud byl zaslán token od uživatele
 
-$token_file = "confug/token.json";
+$token_file = "config/token.json";
 if (file_exists($token_file)){
 // pokud soubor s tokenem existuje
 $jsonData = file_get_contents($token_file); // přijetí souboru JSON s tokenem - cesta je upravena protože soubor je použit jako include
