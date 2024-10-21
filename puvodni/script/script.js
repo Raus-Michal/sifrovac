@@ -39,7 +39,8 @@ pole:`A„7BCD0<KO=PQ@1RS"TUVW[XYZ“Á6ÉEFGŠŘŽabc!def)ghi*j3kl_mnop{ qr.stL
 nep_znaky:"", /* proměnná slouží k výisu nepovolených znaků k šifrování v Dialog okně */
 email:"", /* proměnná na binden value input zobrazení emailu */
 udalos_viditelnost:"", /* promměnná slouží k testování a používání visibilitychange API */
-kliku:0 // proměnná pro statistiku počítá počet kliků na tlačítko šifrovat/dešifrovat pokud je uživatel offline
+kliku:0, // proměnná pro statistiku počítá počet kliků na tlačítko šifrovat/dešifrovat pokud je uživatel offline
+token:"aplikace-Šifrovač-2024" // token pro ověření, že zaslaná statistická data pocházejí z aplikace
 }},
     
 methods:{
@@ -58,11 +59,16 @@ this.reg_sw(false); // funkce provede registraci Servis Workeru (hodnota false==
 },
 
 start(){
+// Klik na tlačítko Spustit při zadávání číselného kódu
 if(this.nepovolen==false)
 {
 // pokud nebyl zadán nepovolený UC - vykoná akci
-this.spustit=false;
-this.apka=true;
+this.spustit=false; // pomocí v-show vypne okno se zadáním Číselného kódu
+this.apka=true; // pomocí v-show zapne hlavní kontejner aplikace
+this.kodovani(this.token,"729318")
+.then(new_token=>{
+this.token=new_token; // pomocí šifrování vytvoří nový token
+});
 }},
 
 reset(){
@@ -523,7 +529,7 @@ this.kliku++; // přičte jeden klik
 const xhr=new XMLHttpRequest();
 xhr.open("POST","statistika/zapis.php",true);
 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-xhr.send(`data=${encodeURIComponent(dataToSend)}&pocet=${encodeURIComponent(this.kliku)}`);  // Odeslání dat
+xhr.send(`pocet=${encodeURIComponent(this.kliku)}&token=${encodeURIComponent(this.token)}`);  // Odeslání dat
 this.kliku=0; // vynuluje počet kliků
 /*
 xhr.onload=()=>{

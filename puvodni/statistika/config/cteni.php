@@ -1,8 +1,15 @@
-
 <?php
-$test = fopen("config/pocet.txt" , "a"); // tento PHP soubor se vkládá pomocí include - cesta se počítá od souboru do kterého byl tento soubor vložen
-fclose($test);
-$handle=fopen("config/pocet.txt" , "r+"); // tento PHP soubor se vkládá pomocí include - cesta se počítá od souboru do kterého byl tento soubor vložen
-$pocet=fread($handle,20);
-fclose($handle);
+// čtení statistických dat
+$file_data = "config/pocet-kliku.json"; // soubor JSON se statistickými daty
+if (file_exists($file_data)){
+// pokud existuje JSON soubor s daty
+$jsonData = file_get_contents($file_data); // načte soubor JSON
+$data = json_decode($jsonData, true); // dekóduje data JSON
+$pocet = $data["klik"]; // načte počet kliků
+}
+else
+{
+// pokud soubor $JSON s daty neexistuje
+$pocet = 0; // bude počet kliků 0
+}
 ?>

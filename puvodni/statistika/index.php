@@ -163,7 +163,7 @@ font-size:2rem;
 </head>
 <body>
 <?php
-include 'config/cteni.php';
+include "config/cteni.php";
 ?>
 <div class="hl-con">
 <h1>Statistika aplikace Šifrovač</h1>
