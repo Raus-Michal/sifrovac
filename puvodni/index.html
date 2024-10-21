@@ -14,7 +14,7 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:update_time" content="2024-10-12T18:00:00+01:00">
+<meta property="og:update_time" content="2024-10-20T18:00:00+01:00">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Šifrovač">
 <meta property="og:type" content="website">
@@ -42,9 +42,9 @@
 "@type": "WebApplication",
 "@id": "WebApplication",
 "dateCreated": "2024-05-22",
-"dateModified": "2024-10-12",
+"dateModified": "2024-10-20",
 "datePublished": "2024-05-22",
-"version": "[1,3]",
+"version": "[1,5]",
 "mainEntityOfPage": "https://www.boar-cz.info",
 "description": "Online šifrování textu. Bezpečnější zasílání textových zpráv pomocí šifrování.",
 "abstract": "Online webová aplikace, která umí šifrovat a dešifrovat text. K tomuto šifrování a dešifrování textu používá šesti místného unikátního číselného kódu.",
@@ -355,7 +355,6 @@ Help
 </div>
 </div>
 
-
 <div ref="okno_prehled" id="okno-prehled" v-show="prehled" class="prehl">
 <div class="prehl-h">
 <div>
@@ -366,11 +365,25 @@ Help
 <button @click="prehled_off" class="butt buttR" type="button" title="Zavřít okno"><span class="i-9 s-1"> </span>Zavřít</button>
 </div>
 </div>
-<div ref="telo_prehled" class="prehl-t"></div>
-
-
-
+<div v-if="prehled_obsah==false" class="fl m1 ac w100"><span class="fh2">Zatím nebylo nic šifrováno ani&nbsp;dešifrováno</span></div>
+<div ref="telo_prehled" class="prehl-t"> </div>
+<div ref="kotva_prehled"> </div>
 </div>
+
+<dialog id="zobrazit_prehled">
+<div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
+<div class="d-s">
+<p class="fh2 pt1" id="h_zobraz">Zobrazit přehled šifrování a&nbsp;dešifrování?</p>
+<p class="f6">Ujistěte se, že&nbsp;se&nbsp;nikdo nedívá na&nbsp;obrazovku Vašeho zařízení!</p>
+<div class="fl ac jc mb1 w100">
+<div class="fl ac jc bv1 p1 wm20r br8 pr">
+<button @click="z_dia('zobrazit_prehled');this.$refs.telo_prehled.style.filter='blur(0px)';" class="butt w100 g05" type="button" title="Zobrazit přehled šifrování a dešifrování"><span class="s-2 i-6"> </span>Zobrazit přehled</button>
+</div></div>
+</div>
+<div class="d-p fl je">
+<button id="z_zobrazit_prehled" @click="z_dia('zobrazit_prehled');prehled_off();" class="butt" type="button" title="Zavřít přehled šifrování a dešifrování"><span class="i-9 s-1"> </span>Nezobrazovat</button>
+</div>
+</dialog>
 
 <dialog id="napoveda">
 <div id="h_napoveda"></div>
@@ -446,7 +459,7 @@ Help
 <p>Aplikace Šifrovač je&nbsp;webovou aplikací <span class="dib">od&nbsp;Boar-cz</span>.</p>
 <p>Aplikace je&nbsp;naprogramovaná jazyky: HTML&#8239;5, CSS&#8239;3, JavaScript&#8239;ES6 a&nbsp;frameworkem Vue&#8239;3. K&nbsp;vytvoření šifrování bylo použito umělé inteligence, konkrétně robota ChatGPT.</p>
 <p>Aplikace je&nbsp;zdarma a&nbsp;podléhá autorským právům.</p>
-<p>Verze aplikace: 1.3</p>
+<p>Verze aplikace: 1.5</p>
 <p class="f8 mb05">Proč šifrovat text</p>
 <p>Tak jako každý dům je možné vykrást, tak i&nbsp;každou textovou zprávu je možné zcizit. Můžeme se&nbsp;rozhodnout, jestli u&nbsp;svého domu necháme dveře otevřené do&nbsp;kořán, anebo&nbsp;si dům co&nbsp;nejvíce zabezpečíme. Čím&nbsp;více zabezpečovacích prvků, tím větší bezpečí a&nbsp;více nepříjemností pro&nbsp;lupiče. Šifrovaný text, můžeme považovat za&nbsp;další zabezpečovací prvek, další dveře, které musí lupič překonat k&nbsp;tomu, aby získal svůj lup. V&nbsp;našem případě text zprávy. Šifrování textu pomocí této aplikace zvyšuje bezpečnost zasílání textových zpráv.</p>
 
@@ -548,7 +561,7 @@ Help
 <div class="d-h fl ac g05"><div class="i-1 s-2 b5w"> </div><p class="m0 f8 cd">Šifrovač</p></div>
 <div class="d-s">
 <p class="fh2 pt1" id="h_reset">Odhlásit&nbsp;se z&nbsp;aplikace?</p>
-<p class="mb0">Pokud se&nbsp;odhlásíte z&nbsp;aplikace:</p>
+<p class="mb0 f6">Pokud se&nbsp;odhlásíte z&nbsp;aplikace:</p>
 <ul>
 <li>Bude ztracen číselný kód</li>
 <li>Bude smazán obsah právě šifrované i&nbsp;dešifrované komunikace</li>

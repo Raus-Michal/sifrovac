@@ -196,6 +196,7 @@ align-items:center;
 gap:1rem;
 width:100%;
 padding:1rem;
+transition:.5s;
 }
 
 .prehl-t div /* Box šifrováno/dešifrováno v těle okna Přehled šifrování a dešifrování */
@@ -427,7 +428,7 @@ border:1px solid var(--b1);
 .kod
 {
 font-size:1.5rem;
-width:2.25rem;
+width:2.2rem;
 height:3rem;
 padding:.5rem;
 }}

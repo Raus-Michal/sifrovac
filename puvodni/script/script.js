@@ -58,6 +58,7 @@ apka:false, /* v-show zobrazení hlavní strany aplikace a schování startovac�
 podminky:false, /* utčuje zda uživatel v startovacím okně souhlasil s podmínkami používání šifrovače */
 spustit:false, /* v-show zobrazení okno s UC startovacího okna */
 prehled:false, // v-show zobrazí okno s přehledem šifrování a dešifrování
+prehled_obsah:false, // proměnná určuje zda je v okně Přehled šifrování a dešifrování nějáký obsah. TRUE===´je tam obsah, FALSE===není tam obsah, POUŽÍVÁ se také jako v-if pro informační text - Zatím nebylo nic šifrováno ani dešifrováno
 souhlas_Ls:["souhlas","vydan"], // proměnná určuje string pro uložení souhlasu v Localstorage [klíč,data]
 uk1:"", /* UC 1. číslo */
 uk2:"", /* UC 2. číslo */
@@ -111,6 +112,7 @@ this.apka=true;
 reset(){
 // funkce zajistí reset aplikace
 this.apka=false; // vypne hlavní kontajner aplikace
+this.spustit=true; // zapne okno se zadáním ČK
 this.uk1=""; // ČK 1. číslo
 this.uk2=""; // ČK 2. číslo
 this.uk3=""; // ČK 3. číslo
@@ -127,9 +129,9 @@ this.t[i]="password"; // změní všechny input pro vstupní ČK na password
 }
 this.videt2=false, //  v-if a v-else-if zobrazení UC přímo v apce
 this.t_v="password"; // v-bind:type 1.-6. input number/password přímo v apce
-this.spustit=true; // zapne okno se zadáním ČK
 const prehled_telo=this.$refs.telo_prehled; // DIV tělo okna Přehled šifrování a dešifrování
-prehled_telo.innerHTML=""; // vymaže obsah DIV tělo okna Přehled šifrování a dešifrování
+prehled_telo.innerHTML=" "; // vymaže obsah DIV tělo okna Přehled šifrování a dešifrování
+this.prehled_obsah=false; // proměnná určuje zda je v okně Přehled šifrování a dešifrování nějáký obsah. TRUE===´je tam obsah, FALSE===není tam obsah
 },
 
 reg_sw(pri_spusteni=true){
@@ -536,6 +538,8 @@ novy_objekt.appendChild(objekt_telo); // přidá P HTML element s textem obsahu 
 
 prehled_telo.appendChild(novy_objekt); // přidá hlavní BOX pro kompletní informaci Šifrováno/Dešifrováno do těla okna Přehled šifrování a dešifrování
 
+this.prehled_obsah=true; // proměnná určuje zda je v okně Přehled šifrování a dešifrování nějáký obsah. TRUE===´je tam obsah, FALSE===není tam obsah
+
 },
 statistika(){
 // funkce slouží k sbírání statistických dat
@@ -720,10 +724,31 @@ prehled_on(){
 this.apka=!this.apka; // v-show - vypnutí hlavního kontajneru aplikace
 this.prehled=!this.prehled; // v-show - zapnutí okna Přehled šifrování a dešifrování
 
-/*
-zatím řešeno 100vw
-this.$refs.okno_prehled.style.width=`${parseInt(window.innerWidth)}px`; // šířka okna Přehled šifrování a dešifrování bude šířkou obrazovky zařízení uživatele
-*/
+if(this.prehled_obsah===false)
+{
+// pokud obsah okna Přehled šifrování a dešifrování bude prázdný
+setTimeout(()=>{
+this.$refs.okno_prehled.scrollIntoView({behavior:'smooth'}); // scroll na horní část okna Přehled šifrování a dešifrování
+// window.scrollTo(0,0); // posun okna TOP
+},200); // drobné zpoždění zabrání konfliktu se scroolTo
+setTimeout(()=>{
+this.$refs.okno_prehled.scrollIntoView({behavior:'smooth'}); // scroll na horní část okna Přehled šifrování a dešifrování
+// window.scrollTo(0,0); // posun okna TOP
+},500); // další scroll pro pomalejší zařízení
+}
+else
+{
+// pokud obsah okna Přehled šifrování a dešifrování bude zaplněn
+this.$refs.telo_prehled.style.filter="blur(5px)"; // rozmaže obsah těla okna Přehled šifrování a dešifrování
+this.o_dia('zobrazit_prehled','h_zobraz','z_zobrazit_prehled'); // otevře dialogové okno s dotazem zda Zobrazit přehled
+
+setTimeout(()=>{
+this.$refs.kotva_prehled.scrollIntoView({behavior:"smooth",block:"center",inline:"center"}); // scroll na kotvu okna Přehled šifrování a dešifrování
+},200); // drobné zpoždění zabrání konfliktu se scroolTo
+setTimeout(()=>{
+this.$refs.kotva_prehled.scrollIntoView({behavior:"smooth",block:"center",inline:"center"}); // scroll na kotvu okna Přehled šifrování a dešifrování
+},500); // další scroll pro pomalejší zařízení
+}
 
 
 },
