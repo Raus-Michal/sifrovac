@@ -94,6 +94,9 @@ this.t_v="password"; // v-bind:type 1.-6. input number/password přímo v apce
 const prehled_telo=this.$refs.telo_prehled; // DIV tělo okna Přehled šifrování a dešifrování
 prehled_telo.innerHTML=" "; // vymaže obsah DIV tělo okna Přehled šifrování a dešifrování
 this.prehled_obsah=false; // proměnná určuje zda je v okně Přehled šifrování a dešifrování nějáký obsah. TRUE===´je tam obsah, FALSE===není tam obsah
+setTimeout(()=>{
+window.scrollTo(0,0); // posun okna TOP, občas se stává, že laiout je posunutý dole, nutný posun TOP
+},100); // drobné zpoždění zabrání konfliktu se scroolTo
 },
 
 reg_sw(pri_spusteni=true){
