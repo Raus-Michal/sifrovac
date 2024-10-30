@@ -1,7 +1,7 @@
 <?php
 // Přijetí dat
 if($_SERVER["REQUEST_METHOD"]==="POST"){
-$pocet=(int)$_POST["pocet"]; // převede poslaný počet na proměnou type number
+$pocet=$_POST["pocet"]; // převede poslaný počet na proměnou type number
 if($pocet)
 {
 // pokud byla zaslaná data s počtem
@@ -16,7 +16,7 @@ $data["klik"]=$old_pocet_kliku+$pocet; // přičte stávající kliky k nově za
 else
 {
 // pokud soubor $JSON s daty neexistuje
-$data = array("klik"=>0); // budou data prozatím pole s 0 kliků
+$data = array("klik"=>1); // budou data prozatím pole s 1 kliků
 }
 $newJsonData = json_encode($data, JSON_PRETTY_PRINT); // aktualizovaná data zakóduje na JSON formát
 file_put_contents($file_data, $newJsonData); // přepíše stávající JSON s aktualizovanými daty

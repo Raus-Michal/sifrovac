@@ -10,7 +10,7 @@ window.addEventListener("load",()=>{
 // načte potřebný script
 let script2=document.createElement("script");
 script2.defer=true;
-script2.src="script/script.js?v=3"; // cesta k hlavnímu scriptu aplikace
+script2.src="script/script.js"; // cesta k hlavnímu scriptu aplikace
 document.body.appendChild(script2);
 });
 }else{
@@ -18,6 +18,6 @@ document.body.appendChild(script2);
 console.log("Externí Vue knihovna byla úspěšně načtena.");
 let script=document.createElement("script");
 script.defer=true;
-script.src="script/script.js?v=4"; // cesta k hlavnímu scriptu aplikace
+script.src="script/script.js"; // cesta k hlavnímu scriptu aplikace
 document.body.appendChild(script);
 }

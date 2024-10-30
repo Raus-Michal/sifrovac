@@ -39,8 +39,7 @@ pole:`A„7BCD0<KO=PQ@1RS"TUVW[XYZ“Á6ÉEFGŠŘŽabc!def)ghi*j3kl_mnop{ qr.stL
 nep_znaky:"", /* proměnná slouží k výisu nepovolených znaků k šifrování v Dialog okně */
 email:"", /* proměnná na binden value input zobrazení emailu */
 udalos_viditelnost:"", /* promměnná slouží k testování a používání visibilitychange API */
-kliku:0, // proměnná pro statistiku počítá počet kliků na tlačítko šifrovat/dešifrovat pokud je uživatel offline
-token:"aplikace-Šifrovač-2024" // token pro ověření, že zaslaná statistická data pocházejí z aplikace
+kliku:1, // proměnná pro statistiku počítá počet kliků na tlačítko šifrovat/dešifrovat pokud je uživatel offline
 }},
     
 methods:{
@@ -65,10 +64,6 @@ if(this.nepovolen==false)
 // pokud nebyl zadán nepovolený UC - vykoná akci
 this.spustit=false; // pomocí v-show vypne okno se zadáním Číselného kódu
 this.apka=true; // pomocí v-show zapne hlavní kontejner aplikace
-this.kodovani(this.token,"729318")
-.then(new_token=>{
-this.token=new_token; // pomocí šifrování vytvoří nový token
-});
 }},
 
 reset(){
@@ -525,29 +520,37 @@ this.kliku=pocet_ls; // počet kliků == počet uložených kliků
 if(navigator.onLine)
 {
 // pokud je uživatel onLine
-const dataToSend="sifrovani";
-try{
+const klik_odeslat=this.kliku;
+const token=document.querySelector("meta[name='csrf-token']").getAttribute("content"); // načte token z meta tagu HTML
+const data=`csrf_token=${encodeURIComponent(token)}&pocet=${encodeURIComponent(klik_odeslat)}`; // nachystá data na odeslání pro fetch API metodou post
+
 // Vytvoření AJAX požadavku
-this.kliku++; // přičte jeden klik
-const xhr=new XMLHttpRequest();
-xhr.open("POST","statistika/zapis.php",true);
-xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-xhr.send(`pocet=${encodeURIComponent(this.kliku)}&token=${encodeURIComponent(this.token)}`);  // Odeslání dat
-this.kliku=0; // vynuluje počet kliků
-/*
-xhr.onload=()=>{
-// Reakce na dokončení požadavku
-if(xhr.status===200){
-console.log('Data byla úspěšně odeslána.');
-}else{
-console.log('Došlo k chybě při odesílání dat.');
-}};
-*/
+fetch("statistika/zapis.php",{
+method:"POST",  // Metoda POST
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"  // Nastavení typu obsahu
+},
+body:data  // data ve formátu klíč=hodnota
+})
+.then(response=>response.text())  // Očekáváme textovou odpověď
+.then(result=>{
+console.log('Výsledek:',result);
+this.kliku=1; // vynuluje počet kliků na default ===1
+if("localStorage" in window&&window["localStorage"]!==null)
+{
+// pokud je Local Storage API podporován
+localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
 }
-catch(err){
-console.log("Statistická data neodeslána. Chyba:"+err);
+})
+.catch(error=>{
+console.error('Chyba při odesílání dat:',error);
 this.kliku++; // přičte jeden klik pokud došlo k chybě
+if("localStorage" in window&&window["localStorage"]!==null)
+{
+// pokud je Local Storage API podporován
+localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
 }
+});
 }
 else
 {

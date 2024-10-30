@@ -1,6 +1,8 @@
 <?php
 // soubor vyloučí nalimitní počet požadavků z jedné IP adresy
 
+session_start(); // Spouští relaci (session) pro uživatele. Session umožňuje ukládat data na straně serveru, která přetrvávají mezi jednotlivými požadavky od stejného uživatele.
+
 $limit = 100;  // Maximální počet požadavků
 $timeWindow = 43200; // Časové okno v sekundách (43200sekund==12hodin)
 

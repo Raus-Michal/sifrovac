@@ -1,41 +1,23 @@
 <?php
-// soubor slouží k ověření tokenu, zda požadavek na přijetí statistických dat přichází opravdu z aplikace
+// soubor slouží k ověření tokenu, zda požadavek na přijetí statistických dat přichází opravdu z našeho webu
 
-if($_SERVER["REQUEST_METHOD"]==="POST"){
-// pokud byla zaslána nějáká data
+session_start(); // Spouští relaci (session) pro uživatele. Session umožňuje ukládat data na straně serveru, která přetrvávají mezi jednotlivými požadavky od stejného uživatele.
 
-$token_od_uzivatele = $_POST["token"]; // zaslaný token od uživatele
+// Ověření, zda byl POST požadavek odeslán s tokenem
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $csrfToken = $_POST['csrf_token'];
 
-if($token_od_uzivatele)
-{
-// pokud byl zaslán token od uživatele
-
-$token_file = "config/token.json";
-if (file_exists($token_file)){
-// pokud soubor s tokenem existuje
-$jsonData = file_get_contents($token_file); // přijetí souboru JSON s tokenem - cesta je upravena protože soubor je použit jako include
-$data = json_decode($jsonData, true); // dekódování JSON souboru pro použití v PHP
-$token = $data["token"]; // vyjmutí tokenu z objektu JSON
-}
-else
-{
-// pokud soubor s tokenem neexistuje
-exit;
+    // Ověření, zda token v session souhlasí s tokenem zaslaným klientem
+    if (isset($_SESSION['csrf_token']) && $csrfToken === $_SESSION['csrf_token']) {
+        echo "Token je platný. Ověření úspěšné.";
+    } else {
+        echo "Token je neplatný. Přístup zamítnut.";
+        exit;
+    }
+} else {
+    echo "Neplatný požadavek.";
+    exit;
 }
 
-if($token_od_uzivatele!=$token)
-{
-// pokud se nezhoduje token od uživatele s tokenem
-exit; // funkce se ukončí
-}
-}
-else
-{
-// pokud nebyl zaslán token od uživatele
-exit; // funkce se ukončí
-}
-}else{
-http_response_code(405); // Method Not Allowed
-}
 
 ?>
