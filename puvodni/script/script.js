@@ -1115,36 +1115,42 @@ else
 this.podminky=true; // v-show : zobrazí úvodní okno Se souhlasem s podmínkami 
 }
 
-function prepis_odkazy(){
-// funkce zajistí přepis odkazu href na JS funkci window.open u odkazů na sociální sítě Facebook, síť X a Webové stránky výrobce aplikace
-const id=["sdil-fb","sdil-tw","href_boar"];
-const SIRKA=600; // šířka nově otevřeného okna v px
-const VYSKA=600; // výška nově otevřeného okna v px
-const min_VYSKA=800; // minimální výška obrazovky v px
-const min_SIRKA=800; // minimální šířka obrazovky v px
-const vyska=parseInt(window.screen.height); // výška obrazovky v px
-const sirka=parseInt(window.screen.width); // šířka obrazovky v px
-const z_leva=sirka/2-SIRKA/2; // poloha nového okna z leva
-const z_hora=vyska/2-VYSKA/2; // poloha nového okna z hora
+class Sdilet{
+_idFB="sdil-fb";
+_idTW="sdil-tw";
+_idBoard="href_boar";
 
-// funkce přepíše HREF na tlačítkách sdílet Facebook, sdílet Twitter a webové stránky programátora
-if(vyska>min_VYSKA&&sirka>min_SIRKA) // podmínka, pro obrazovky s požadovanou velikostí, aby zbytečně pro malé obrazovky nebyl href upravován
+SIRKA=600;
+VYSKA=600;
+min_VYSKA=800;
+min_SIRKA=800;
+prepis(){
+const vyska=window.screen.height; // výška obrazovky
+const sirka=window.screen.width; // šířka obrazovky
+const z_leva=sirka/2-this.SIRKA/2;
+const z_hora=vyska/2-this.VYSKA/2;
+const updateLink=(id,windowName)=>
 {
-let l=id.length;
-for(let i=0;i<l;i++)
+const el=document.getElementById(id);
+if(el&&vyska>this.min_VYSKA&&sirka>this.min_SIRKA)
 {
-// smička, která všechny odkazy, které budou mít ID uvedené v poli this.id upraví tak, aby se otvírali pomocí window.open v rozměru podle parametrů v objektu
-if(document.getElementById(id[i])) /* podmínka zaručuje, že objekt v HTML existuje */
-{
-const obj=document.getElementById(id[i]); // načte objekt odkazu do proměnné
-const Ahref=obj.href; // načte href odkazu do proměnné
-obj.target=""; // target musí být prázdý jinak nové okno neotevře
-const text=`window.open('${Ahref}','','width=${SIRKA},height=${VYSKA},left=${z_leva},top=${z_hora}',false);`; // vytvoří JS příkaz, který bude v href odkazu
-obj.href=`javascript:${text}`; // přepíše href odkazu na nový JavaScriptový výraz window.open
-}}
+const href=el.href; // načte stávající href odkazu
+el.removeAttribute("href"); // odstraní stávající href
+el.addEventListener("click",(e)=>{
+e.preventDefault(); // zabrání standardnímu chování odkazu
+window.open(href, windowName, `width=${this.SIRKA},height=${this.VYSKA},left=${z_leva},top=${z_hora},resizable=yes`); // otevře nové okno
+});
 }
 };
-prepis_odkazy(); // funkce přepíše odkazy na sociální sítě Facebook, síť X a Webové stránky výrobce aplikace
+// Přepíše HREF na tlačítkách sdílet Facebook a sdílet Twitter
+updateLink(this._idFB,"Sdílet na FB");
+updateLink(this._idTW,"Sdílet na Twitteru");
+updateLink(this._idBoard,"Webové stránky výrobce aplikace");
+}
+};
+
+const sdilet=new Sdilet(); // založí z class Sdilet objekt sdilet
+sdilet.prepis(); // zajistí přepis HREF tlačítek pro sdílení na Facebooku,Twittru a Boar-cz - webové stavby
 
 },
 

@@ -135,6 +135,7 @@ a,a:link,a:visited,a:active
 {
 color:var(--b1);
 text-decoration:none;
+cursor:pointer;
 }
 
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{
@@ -177,7 +178,9 @@ border-radius:16px;
 {
 display:none;
 width:100vw;
+width:100dvw;
 min-height:100vh;
+min-height:100dvh;
 background-color:var(--b4);
 }
 
@@ -334,19 +337,19 @@ background-position:0 0;
 /* facebook */
 background-position:5.882% 0;
 }
-  
+
 .i-3
 {
 /* twitter */
 background-position:11.765% 0;
 }
-  
+
 .i-4
 {
 /* play */
 background-position:17.647% 0;
 }
-  
+
 .i-5
 {
 /* varování */
