@@ -1,4 +1,4 @@
-"use-strict"
+"use-strict";
 // v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 document.getElementById("h-con").style.display="grid";
 document.getElementById("u-podminky").style.display="block";
@@ -522,68 +522,54 @@ prehled_telo.appendChild(novy_objekt); // přidá hlavní BOX pro kompletní inf
 this.prehled_obsah=true; // proměnná určuje zda je v okně Přehled šifrování a dešifrování nějáký obsah. TRUE===´je tam obsah, FALSE===není tam obsah
 
 },
-statistika(){
-// funkce slouží k sbírání statistických dat
+async statistika() {
+    // Zpracování Local Storage
+    if ("localStorage" in window && window["localStorage"] !== null) {
+      let pocet_ls = localStorage.getItem("statistika"); // Načtení počtu kliků z Local Storage
+      if (pocet_ls !== null) {
+        pocet_ls = parseInt(pocet_ls, 10); // Převod stringu na číslo - Použitím parseInt(pocet_ls, 10) explicitně specifikujeme, že se vstup má převést do desítkové soustavy, čímž zabráníme nechtěnému chování při zpracování různých vstupů.
+        this.kliku = pocet_ls; // Nastavení počtu kliků
+      }
+    }
 
-if("localStorage" in window&&window["localStorage"]!==null)
-{
-// pokud je Local Storage API podporován
-let pocet_ls=localStorage.getItem("statistika"); // poček kliknutí uložených na local storage
-
-if(pocet_ls!==null)
-{
-// pokud byla nějáká data načtena
-pocet_ls=parseInt(pocet_ls); // převede string na number
-this.kliku=pocet_ls; // počet kliků == počet uložených kliků
-}
-}
-
-if(navigator.onLine)
-{
-// pokud je uživatel onLine
-const klik_odeslat=this.kliku;
-const token=document.querySelector("meta[name='csrf-token']").getAttribute("content"); // načte token z meta tagu HTML
-const data=`csrf_token=${encodeURIComponent(token)}&pocet=${encodeURIComponent(klik_odeslat)}`; // nachystá data na odeslání pro fetch API metodou post
-
-// Vytvoření AJAX požadavku
-fetch("statistika/zapis.php",{
-method:"POST",  // Metoda POST
-headers:{
-"Content-Type":"application/x-www-form-urlencoded"  // Nastavení typu obsahu
-},
-body:data  // data ve formátu klíč=hodnota
-})
-.then(response=>response.text())  // Očekáváme textovou odpověď
-.then(result=>{
-console.log('Výsledek:',result);
-this.kliku=1; // vynuluje počet kliků na default ===1
-if("localStorage" in window&&window["localStorage"]!==null)
-{
-// pokud je Local Storage API podporován
-localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
-}
-})
-.catch(error=>{
-console.error('Chyba při odesílání dat:',error);
-this.kliku++; // přičte jeden klik pokud došlo k chybě
-if("localStorage" in window&&window["localStorage"]!==null)
-{
-// pokud je Local Storage API podporován
-localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
-}
-});
-}
-else
-{
-// pokud není uživatel onLine
-this.kliku++; // přičte jeden klik pokud není uživatel onLine
-}
-
-if("localStorage" in window&&window["localStorage"]!==null)
-{
-// pokud je Local Storage API podporován
-localStorage.setItem("statistika",this.kliku); // uloží na Local storage počet kliků
-}},
+    // Zkontrolování online stavu
+    if (navigator.onLine) {
+      try {
+        const klik_odeslat = this.kliku;
+        const token = document.querySelector("meta[name='csrf-token']").getAttribute("content"); // Načtení CSRF tokenu
+        const data = `csrf_token=${encodeURIComponent(token)}&pocet=${encodeURIComponent(klik_odeslat)}`; // Příprava dat
+  
+        // Odeslání dat přes Fetch API
+        const response = await fetch("statistika/zapis.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data,
+        });
+  
+        this.kliku = 1; // Vynulování počtu kliků na default
+        if ("localStorage" in window && window["localStorage"] !== null) {
+          localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
+        }
+      } catch (error) {
+        console.error("Chyba při odesílání dat:", error);
+        this.kliku++; // Přičtení kliků při chybě
+        if ("localStorage" in window && window["localStorage"] !== null) {
+          localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
+        }
+      }
+    } else {
+      // Pokud není uživatel online
+      this.kliku++; // Přičtení kliků
+    }
+  
+    // Uložení do Local Storage
+    if ("localStorage" in window && window["localStorage"] !== null) {
+      localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
+    }
+  },
+  
 
 akce(){
 // Zmáčknutí tlačítka šifrovat anebo dešifrovat - odeslání dat pro statistiku
