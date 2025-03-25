@@ -523,52 +523,40 @@ this.prehled_obsah=true; // proměnná určuje zda je v okně Přehled šifrová
 
 },
 async statistika() {
-    // Zpracování Local Storage
-    if ("localStorage" in window && window["localStorage"] !== null) {
-      let pocet_ls = localStorage.getItem("statistika"); // Načtení počtu kliků z Local Storage
-      if (pocet_ls !== null) {
-        pocet_ls = parseInt(pocet_ls, 10); // Převod stringu na číslo - Použitím parseInt(pocet_ls, 10) explicitně specifikujeme, že se vstup má převést do desítkové soustavy, čímž zabráníme nechtěnému chování při zpracování různých vstupů.
-        this.kliku = pocet_ls; // Nastavení počtu kliků
-      }
-    }
+  // Načtení počtu kliků z Local Storage
+  let pocet_ls = localStorage.getItem("statistika");
+  this.kliku = pocet_ls ? parseInt(pocet_ls, 10) || 0 : 0;
 
-    // Zkontrolování online stavu
-    if (navigator.onLine) {
-      try {
-        const klik_odeslat = this.kliku;
-        const token = document.querySelector("meta[name='csrf-token']").getAttribute("content"); // Načtení CSRF tokenu
-        const data = `csrf_token=${encodeURIComponent(token)}&pocet=${encodeURIComponent(klik_odeslat)}`; // Příprava dat
-  
-        // Odeslání dat přes Fetch API
-        const response = await fetch("statistika/zapis.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: data,
-        });
-  
-        this.kliku = 1; // Vynulování počtu kliků na default
-        if ("localStorage" in window && window["localStorage"] !== null) {
-          localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
-        }
-      } catch (error) {
-        console.error("Chyba při odesílání dat:", error);
-        this.kliku++; // Přičtení kliků při chybě
-        if ("localStorage" in window && window["localStorage"] !== null) {
-          localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
-        }
-      }
-    } else {
-      // Pokud není uživatel online
-      this.kliku++; // Přičtení kliků
+  if (navigator.onLine) {
+    try {
+      const tokenMeta = document.querySelector("meta[name='csrf-token']");
+      const token = tokenMeta ? tokenMeta.getAttribute("content") : "";
+
+      const data = new URLSearchParams({
+        csrf_token: token,
+        pocet: this.kliku
+      });
+
+      const response = await fetch("statistika/zapis.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: data
+      });
+
+      if (!response.ok) throw new Error(`Chyba serveru: ${response.status}`);
+
+      this.kliku = 1;
+    } catch (error) {
+      console.error("Chyba při odesílání:", error);
+      this.kliku++;
     }
-  
-    // Uložení do Local Storage
-    if ("localStorage" in window && window["localStorage"] !== null) {
-      localStorage.setItem("statistika", this.kliku); // Uložení do Local Storage
-    }
-  },
+  } else {
+    this.kliku++;
+  }
+  if (localStorage) {
+  localStorage.setItem("statistika", this.kliku);
+}
+},
   
 
 akce(){
