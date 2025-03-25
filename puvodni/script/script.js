@@ -1,4 +1,4 @@
-
+"use-strict"
 // v css mají nastavený display:none - z důvodů prví animace Loading - a teď se provede náprava
 document.getElementById("h-con").style.display="grid";
 document.getElementById("u-podminky").style.display="block";
@@ -390,7 +390,16 @@ startIndex+=100;
 return encodedText; // Vrací zakódovaný text
 },
 
-
+async kodovaniTextu(text, key) {
+try {
+    const new_text = await this.kodovani(text, key); // Čeká na výsledky z asynchronní metody kodovani
+    const k_text = `#${new_text}#`; // Přidá na začátek a konec zakódovaného řetězce #
+    this.text_o2 = k_text; // Převede zakódovaný text do druhého okna
+    this.vlozit_prehled("Šifrování", text); // Přidá text do Přehledu
+    } catch (error) {
+    console.error("Chyba při zakódování:", error); // Zpracuje chybu, pokud nastane
+    }
+},
 // Funkce pro dekódování zakódovaného textu s použitím vlastního pole znaků pro posun
 async dekodovani(encodedText,key){
 const charSet=this.pole; // Vlastní pole znaků
@@ -417,7 +426,19 @@ startIndex+=100;
 }
 return decodedText; // Vrací dekódovaný text
 },
-async vlozit_prehled(akce="",text=""){
+
+// Dekódování textu asynchronně
+async dekodovaniTextu(d_text,key){
+try{
+const new_text = await this.dekodovani(d_text, key); // provede samotné dekódování
+this.text_o2 = new_text; // převede dekódovaný text do druhého okna area
+this.vlozit_prehled("Dešifrování", new_text); // přidá text do Přehled Šifrování a dešifrování
+} catch (error) {
+console.error("Chyba při dekódování: ", error);
+}
+},
+
+vlozit_prehled(akce="",text=""){
 // funkce slouží k vložení textu do okna Přehled šifrování a dešifrování akce="" / šifrování anebo dešifrování ; text="" - text který se buď šifroval anebo dešifroval
 if((akce===""||text==="")&&(akce!=="Šifrování"||akce!=="Dešifrování")) /* ||akce!=="Šifrování"||akce!=="Dešifrování" */
 {
@@ -612,29 +633,13 @@ return;
 const u_delka=l-1; /* upravená délka řetězce, aby bylo možné odříznout poslední znak v řetězci */
 const d_text=text.slice(1,u_delka); /* z proměnná text vyřízne část řetězce kde vynechá 1. a poslední znak v řetězci, který by měl být #, která na začátek a konec řetězce byly přidány při zakódování  */
 
-// Dekódování textu asynchronně
-this.dekodovani(d_text,key)
-.then(new_text=>{
-this.text_o2=new_text;  /* převede dekódovaný text do druhého okna area */
-this.vlozit_prehled("Dešifrování",new_text); // funkce zajistí, že text který byl dešifrován bude přidán do okna Přehled Šifrování a dešifrování
-})
-.catch(error=>{
-console.error("Chyba při dekódování: ",error);
-});
+// Volání funkce (například při nějaké události)
+this.dekodovaniTextu(d_text, key);
 }
 else
 {
 /* pokud je aktivní šifrování */
-// Kódování textu asynchronně
-this.kodovani(text,key)
-.then(new_text=>{
-const k_text=`#${new_text}#`; /* přidá na začátek a konec zakódovaného řetězce # ,aby určil počátek a konec kódování */
-this.text_o2=k_text;  /* převede kódovaný text do druhého okna area */
-this.vlozit_prehled("Šifrování",text); // funkce zajistí, že text který se šifroval bude přidán do okna Přehled Šifrování a dešifrování
-})
-.catch(error=>{
-console.error("Chyba při zakódování:", error);
-});
+this.kodovaniTextu(text,key); // Kódování textu asynchronně
 }
 },
 
